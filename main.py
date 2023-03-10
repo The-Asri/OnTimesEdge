@@ -26,4 +26,4 @@ init()
 
 while True:
     main()
-print("UI")
+    print("UI")
