@@ -26,4 +26,3 @@ init()
 
 while True:
     main()
-    print("UI")
