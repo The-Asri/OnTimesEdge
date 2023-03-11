@@ -1,16 +1,16 @@
 import pygame
-from sys import exit
 import eventHandler
 import KeyManager
-
+import camera
 
 screen = None
 surface = None
 clock = None
 keyManager = None
+cam = None
 trueWidth = 150
 trueHeight = 100
-upscale = 8
+upscale = 6
 width = trueWidth * upscale
 height = trueHeight * upscale
 
@@ -20,6 +20,7 @@ def init():
     global clock
     global keyManager
     global surface
+    global cam
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -27,6 +28,7 @@ def init():
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
+    cam = camera.Camera(camera.Target(100, 100))
 
 
 def main():
@@ -41,15 +43,19 @@ def main():
 
 
 def update():
-    pass
-
-
+    print(cam.x)
+    print(cam.y)
+    cam.update()
 def draw():
-    surface.blit(testImage, (20, 20))
+    # draw below here!
+
+    # here
+
+    # dont edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
 
 init()
-testImage = pygame.image.load("./graphics/schneebimer.png")
+
 while True:
     main()
