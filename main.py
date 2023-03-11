@@ -37,8 +37,10 @@ def main():
     draw()
     pygame.display.update()
     clock.tick(30)
-    if keyManager.key_jump:
-        print("jump")
+    if keyManager.key_escape:
+        pygame.quit()
+        exit()
+
 
 def update():
     print(cam.x)
@@ -51,7 +53,7 @@ def draw():
 
     # dont edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
-    screen.blit(upscaled,(0,0))
+    screen.blit(upscaled, (0, 0))
 
 init()
 

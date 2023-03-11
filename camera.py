@@ -8,13 +8,14 @@ class Target:
 
 
 class Camera:
-    def __init__(self, target):
+    def __init__(self, target=None):
         self.target = target
         self.x = target.x
         self.y = target.y
 
     def update(self):
-        dx = self.target.x - self.x
-        dy = self.target.y - self.y
-        self.x += dx * factor
-        self.y += dy * factor
+        if self.target is not None:
+            dx = self.target.x - self.x
+            dy = self.target.y - self.y
+            self.x += dx * factor
+            self.y += dy * factor

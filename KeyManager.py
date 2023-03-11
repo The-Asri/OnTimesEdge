@@ -1,5 +1,6 @@
 import pygame
 
+
 class KeyManager:
     def __init__(self):
         self.key_left = False
