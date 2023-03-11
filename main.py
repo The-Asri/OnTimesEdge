@@ -1,4 +1,6 @@
 import pygame
+
+import box
 import eventHandler
 import KeyManager
 import camera
@@ -44,16 +46,31 @@ def main():
 
 def update():
     cam.update()
+    if keyManager.key_left:
+        box1.x -= 1
+    if keyManager.key_right:
+        box1.x += 1
+    if keyManager.key_jump:
+        box1.y -= 1
+    if keyManager.key_switch:
+        box1.y += 1
+
+    print(box2.is_colliding(box1))
 def draw():
+    surface.fill("Black")
     # draw below here!
 
-    # here
+    box1.draw(surface, cam)
+    box2.draw(surface, cam)
 
     # dont edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
 
 init()
+
+box1 = box.Box(10, 10, 5, 4)
+box2 = box.Box(50, 50, 20, 30)
 
 while True:
     main()
