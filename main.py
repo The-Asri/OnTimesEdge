@@ -1,10 +1,11 @@
 import pygame
-
-import box
 import eventHandler
 import KeyManager
 import camera
+import box
 import border
+import Player
+import LevelAssets
 
 screen = None
 surface = None
@@ -17,12 +18,8 @@ upscale = 6
 width = trueWidth * upscale
 height = trueHeight * upscale
 levelBorder = None
-
-box1 = box.Box(10, 10, 5, 4)
-box2 = box.Box(50, 50, 20, 30)
-box3 = box.Box(100, 50, 20, 60)
-box4 = box.Box(40, 80, 50, 20)
-
+player = None
+boxes = []
 
 def init():
     global screen
@@ -31,6 +28,7 @@ def init():
     global surface
     global cam
     global levelBorder
+    global player
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -38,8 +36,10 @@ def init():
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
-    levelBorder = border.Border(200, 150)
-    cam = camera.Camera(trueWidth, trueHeight, levelBorder, box1)
+    player = Player.Player(0, 0)
+    levelBorder = border.Border(0, 0)
+    LevelAssets.loadLevel(1, boxes, levelBorder, player)
+    cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
 
 
 def main():
@@ -54,32 +54,23 @@ def main():
 
 
 def update():
+    player.update(boxes, keyManager)
     cam.update(trueWidth, trueHeight, levelBorder)
 
-    if keyManager.key_left:
-        box1.x -= 1
-    if keyManager.key_right:
-        box1.x += 1
-    if keyManager.key_up:
-        box1.y -= 1
-    if keyManager.key_down:
-        box1.y += 1
 def draw():
     surface.fill("Black")
     # draw below here!
 
-    box1.draw(surface, cam)
-    box2.draw(surface, cam)
-    box3.draw(surface, cam)
-    box4.draw(surface, cam)
+    for b in boxes:
+        b.draw(surface, cam)
+
+    player.draw(surface, cam)
 
     # dont edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
 
 init()
-
-cam.target = box1
 
 while True:
     main()

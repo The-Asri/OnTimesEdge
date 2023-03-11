@@ -15,7 +15,7 @@ class Box:
     def draw(self, s, c):
         pygame.draw.rect(s, "Red", (self.x - self.width/2 - c.x, self.y - self.height/2 - c.y, self.width, self.height), 1)
 
-    def is_colliding(self, b):
+    def isColliding(self, b):
         for point in b.getPoints():
             if self.x - self.width / 2 <= point[0] <= self.x + self.width / 2 and \
                     self.y - self.height / 2 <= point[1] <= self.y + self.height / 2:
