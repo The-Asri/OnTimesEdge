@@ -1,6 +1,8 @@
 import pygame
+from sys import exit
 import eventHandler
 import KeyManager
+
 
 screen = None
 surface = None
@@ -33,17 +35,21 @@ def main():
     draw()
     pygame.display.update()
     clock.tick(30)
-    if keyManager.key_jump:
-        print("jump")
+    if keyManager.key_escape:
+        pygame.quit()
+        exit()
+
 
 def update():
     pass
+
+
 def draw():
-    surface.blit(testImage, (20,20))
+    surface.blit(testImage, (20, 20))
     upscaled = pygame.transform.scale_by(surface, upscale)
-    screen.blit(upscaled,(0,0))
+    screen.blit(upscaled, (0, 0))
 
 init()
-testImage = pygame.image.load("graphics\\schneebimer.png")
+testImage = pygame.image.load("./graphics/schneebimer.png")
 while True:
     main()

@@ -1,6 +1,7 @@
 import pygame
 from sys import exit
 
+
 def eventHandler(keyManager):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
