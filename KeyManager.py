@@ -5,6 +5,8 @@ class KeyManager:
     def __init__(self):
         self.key_left = False
         self.key_right = False
+        self.key_up = False
+        self.key_down = False
         self.key_jump = False
         self.key_switch = False
         self.key_reset = False
@@ -15,6 +17,10 @@ class KeyManager:
             self.key_left = True
         if key == pygame.K_d:
             self.key_right = True
+        if key == pygame.K_w:
+            self.key_up = True
+        if key == pygame.K_s:
+            self.key_down = True
         if key == pygame.K_SPACE:
             self.key_jump = True
         if key == pygame.K_e:
@@ -29,6 +35,10 @@ class KeyManager:
             self.key_left = False
         if key == pygame.K_d:
             self.key_right = False
+        if key == pygame.K_w:
+            self.key_up = False
+        if key == pygame.K_s:
+            self.key_down = False
         if key == pygame.K_SPACE:
             self.key_jump = False
         if key == pygame.K_e:

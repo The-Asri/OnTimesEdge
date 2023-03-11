@@ -1,4 +1,4 @@
-factor = 0.9
+factor = 0.2
 
 
 class Target:
@@ -8,18 +8,18 @@ class Target:
 
 
 class Camera:
-    def __init__(self, target=None):
+    def __init__(self, w, h, target=None):
         self.target = target
         if target is not None:
-            self.x = target.x
-            self.y = target.y
+            self.x = target.x - w / 2
+            self.y = target.y - h / 2
         else:
-            self.x = 0
-            self.y = 0
+            self.x = w / 2
+            self.y = h / 2
 
-    def update(self):
+    def update(self, w, h):
         if self.target is not None:
-            dx = self.target.x - self.x
-            dy = self.target.y - self.y
+            dx = self.target.x - self.x - w / 2
+            dy = self.target.y - self.y - h / 2
             self.x += dx * factor
             self.y += dy * factor

@@ -16,6 +16,11 @@ upscale = 6
 width = trueWidth * upscale
 height = trueHeight * upscale
 
+box1 = box.Box(10, 10, 5, 4)
+box2 = box.Box(50, 50, 20, 30)
+box3 = box.Box(100, 50, 20, 60)
+box4 = box.Box(40, 80, 50, 20)
+
 
 def init():
     global screen
@@ -30,7 +35,7 @@ def init():
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
-    cam = camera.Camera()
+    cam = camera.Camera(trueWidth, trueHeight, box1)
 
 
 def main():
@@ -45,14 +50,15 @@ def main():
 
 
 def update():
-    cam.update()
+    cam.update(trueWidth, trueHeight)
+
     if keyManager.key_left:
         box1.x -= 1
     if keyManager.key_right:
         box1.x += 1
-    if keyManager.key_jump:
+    if keyManager.key_up:
         box1.y -= 1
-    if keyManager.key_switch:
+    if keyManager.key_down:
         box1.y += 1
 
     print(box2.is_colliding(box1))
@@ -62,6 +68,8 @@ def draw():
 
     box1.draw(surface, cam)
     box2.draw(surface, cam)
+    box3.draw(surface, cam)
+    box4.draw(surface, cam)
 
     # dont edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
@@ -69,8 +77,7 @@ def draw():
 
 init()
 
-box1 = box.Box(10, 10, 5, 4)
-box2 = box.Box(50, 50, 20, 30)
+cam.target = box1
 
 while True:
     main()
