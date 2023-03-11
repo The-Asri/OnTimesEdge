@@ -4,6 +4,7 @@ import box
 import eventHandler
 import KeyManager
 import camera
+import border
 
 screen = None
 surface = None
@@ -15,6 +16,7 @@ trueHeight = 100
 upscale = 6
 width = trueWidth * upscale
 height = trueHeight * upscale
+levelBorder = None
 
 box1 = box.Box(10, 10, 5, 4)
 box2 = box.Box(50, 50, 20, 30)
@@ -28,6 +30,7 @@ def init():
     global keyManager
     global surface
     global cam
+    global levelBorder
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -35,7 +38,8 @@ def init():
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
-    cam = camera.Camera(trueWidth, trueHeight, box1)
+    levelBorder = border.Border(200, 150)
+    cam = camera.Camera(trueWidth, trueHeight, levelBorder, box1)
 
 
 def main():
@@ -50,7 +54,7 @@ def main():
 
 
 def update():
-    cam.update(trueWidth, trueHeight)
+    cam.update(trueWidth, trueHeight, levelBorder)
 
     if keyManager.key_left:
         box1.x -= 1
@@ -60,8 +64,6 @@ def update():
         box1.y -= 1
     if keyManager.key_down:
         box1.y += 1
-
-    print(box2.is_colliding(box1))
 def draw():
     surface.fill("Black")
     # draw below here!
