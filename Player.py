@@ -56,8 +56,8 @@ class Player(box.Box):
         if keyManager.key_jump:
             self.vy -= gravityCap
 
-        self.moveY(boxes)
         self.moveX(boxes)
+        self.moveY(boxes)
 
     def moveX(self, boxes):
         hb = self.getHitbox()
@@ -65,9 +65,9 @@ class Player(box.Box):
         for b in boxes:
             if b.isColliding(hb):
                 if self.vx > 0:
-                    self.x = b.x - hb.width - 0.069
+                    self.x = b.x - hb.width + 2 - 0.069
                 if self.vx < 0:
-                    self.x = b.x + b.width + 0.069
+                    self.x = b.x + b.width + 2 + 0.069
                 self.vx = 0
                 return
         self.x += self.vx
@@ -80,7 +80,7 @@ class Player(box.Box):
                 if self.vy > 0:
                     self.y = b.y - hb.height - 0.069
                 if self.vy < 0:
-                    self.y = b.y + b.height + 1.069
+                    self.y = b.y + b.height + 0.069
                 self.vy = 0
                 return
         self.y += self.vy
