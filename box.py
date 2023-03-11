@@ -9,15 +9,15 @@ class Box:
         self.height = h
 
     def getPoints(self):
-        return [[self.x - self.width/2, self.y - self.height/2], [self.x + self.width/2, self.y - self.height/2],
-                [self.x - self.width/2, self.y + self.height/2], [self.x + self.width/2, self.y + self.height/2]]
+        return [[self.x, self.y], [self.x + self.width, self.y],
+                [self.x, self.y + self.height], [self.x + self.width, self.y + self.height]]
 
     def draw(self, s, c):
-        pygame.draw.rect(s, "Red", (self.x - self.width/2 - c.x, self.y - self.height/2 - c.y, self.width, self.height), 1)
+        pygame.draw.rect(s, "Red", (self.x - c.x, self.y - c.y, self.width, self.height), 1)
 
     def isColliding(self, b):
         for point in b.getPoints():
-            if self.x - self.width / 2 <= point[0] <= self.x + self.width / 2 and \
-                    self.y - self.height / 2 <= point[1] <= self.y + self.height / 2:
+            if self.x <= point[0] <= self.x + self.width and \
+                    self.y <= point[1] <= self.y + self.height:
                 return True
         return False
