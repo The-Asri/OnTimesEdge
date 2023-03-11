@@ -28,7 +28,7 @@ def init():
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
-    cam = camera.Camera(camera.Target(100, 100))
+    cam = camera.Camera()
 
 
 def main():
@@ -43,8 +43,6 @@ def main():
 
 
 def update():
-    print(cam.x)
-    print(cam.y)
     cam.update()
 def draw():
     # draw below here!

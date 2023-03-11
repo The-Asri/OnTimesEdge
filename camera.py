@@ -10,8 +10,12 @@ class Target:
 class Camera:
     def __init__(self, target=None):
         self.target = target
-        self.x = target.x
-        self.y = target.y
+        if target is not None:
+            self.x = target.x
+            self.y = target.y
+        else:
+            self.x = 0
+            self.y = 0
 
     def update(self):
         if self.target is not None:
