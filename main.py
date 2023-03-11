@@ -12,7 +12,6 @@ def init():
     screen = pygame.display.set_mode((600, 500))
     pygame.display.set_caption("GameJam")
     clock = pygame.time.Clock()
-    print("hi")
 
 
 def main():
