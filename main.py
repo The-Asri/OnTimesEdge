@@ -51,6 +51,8 @@ def main():
     if keyManager.key_escape:
         pygame.quit()
         exit()
+    if keyManager.key_reset:
+        LevelAssets.loadLevel(1, boxes, levelBorder, player)
 
 
 def update():

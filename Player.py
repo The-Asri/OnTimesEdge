@@ -1,12 +1,14 @@
 import box
 
-gravity = 0.5
+gravity = 0.6
+gravityCap = 0.2
 jumpPower = 5
-speed = 1
+jumpCap = 1.8
+speed = 0.5
 friction_standing = 0.5
-friction_running = 0.8
-friction_jumping = 0.95
-jumpBoost = 1.5
+friction_running = 0.85
+friction_jumping = 0.99
+jumpBoost = 1.15
 class Player(box.Box):
     def __init__(self, x, y):
         super().__init__(x, y, 12, 12)
@@ -25,12 +27,15 @@ class Player(box.Box):
             if not keyManager.key_left and not keyManager.key_right:
                 self.vx *= friction_standing
             if keyManager.key_jump:
-                self.vy -= jumpPower
+                self.vy -= (jumpPower + abs(self.vx)) / jumpCap
                 self.vx *= jumpBoost
         else:
             self.vx *= friction_jumping
 
         self.vy += gravity
+        if keyManager.key_jump:
+            self.vy -= gravityCap
+
         self.moveY(boxes)
         self.moveX(boxes)
 
