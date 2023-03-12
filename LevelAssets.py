@@ -2,11 +2,11 @@ import box
 import border
 import Player
 
-def loadLevel(id, boxes, levelBorder, player):
+def loadLevel(id, boxesCity, boxesRuins, levelBorder, player):
     if id == 1:
-        loadLevel1(boxes, levelBorder, player)
+        loadLevel1(boxesCity, boxesRuins, levelBorder, player)
 
-def loadLevel1(boxes, levelBorder, player):
+def loadLevel1(boxesCity, boxesRuins, levelBorder, player):
     player.x = 100
     player.y = 100 - 12 - 1
     player.vx = 0
@@ -14,7 +14,11 @@ def loadLevel1(boxes, levelBorder, player):
     levelBorder.x = 500
     levelBorder.y = 150
 
-    boxes.clear()
-    boxes.append(box.Box(50, 100, 150, 25))
-    boxes.append(box.Box(250, 100, 100, 25))
-    boxes.append(box.Box(370, 70, 100, 50))
+    boxesCity.clear()
+    boxesRuins.clear()
+    boxesCity.append(box.Box(50, 100, 150, 25))
+    boxesCity.append(box.Box(250, 100, 100, 25))
+    boxesCity.append(box.Box(370, 70, 100, 50))
+    boxesRuins.append(box.Box(50, 100, 150, 25))
+    boxesRuins.append(box.Box(250, 100, 100, 25))
+    boxesRuins.append(box.Box(170, 85, 100, 50))

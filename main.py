@@ -19,7 +19,12 @@ width = trueWidth * upscale
 height = trueHeight * upscale
 levelBorder = None
 player = None
-boxes = []
+boxesCity = []
+boxesRuins = []
+inCity = True
+bufferBox = None
+bufferTime = None
+switchLock = False
 
 def init():
     global screen
@@ -38,11 +43,16 @@ def init():
     keyManager = KeyManager.KeyManager()
     player = Player.Player(0, 0)
     levelBorder = border.Border(0, 0)
-    LevelAssets.loadLevel(1, boxes, levelBorder, player)
+    LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
 
 
 def main():
+    global inCity
+    global bufferBox
+    global bufferTime
+    global switchLock
+
     eventHandler.eventHandler(keyManager)
     update()
     draw()
@@ -52,19 +62,58 @@ def main():
         pygame.quit()
         exit()
     if keyManager.key_reset:
-        LevelAssets.loadLevel(1, boxes, levelBorder, player)
+        LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, player)
+        inCity = True
+    if keyManager.key_switch and not switchLock:
+        switchLock = True
+        if inCity:
+            for b in boxesRuins:
+                if b.isColliding(player):
+                    bufferBox = b
+                    bufferTime = 0
+                    break
+            else:
+                inCity = False
+        else:
+            for b in boxesCity:
+                if b.isColliding(player):
+                    bufferBox = b
+                    bufferTime = 0
+                    break
+            else:
+                inCity = True
+    if not keyManager.key_switch:
+        switchLock = False
 
 
 def update():
-    player.update(boxes, keyManager)
+    print(inCity)
+    if inCity:
+        player.update(boxesCity, keyManager)
+    else:
+        player.update(boxesRuins, keyManager)
     cam.update(trueWidth, trueHeight, levelBorder)
 
 def draw():
+    global bufferBox
+    global bufferTime
+
     surface.fill("Black")
     # draw below here!
 
-    for b in boxes:
-        b.draw(surface, cam)
+    if inCity:
+        for b in boxesCity:
+            b.draw(surface, cam)
+    else:
+        for b in boxesRuins:
+            b.draw(surface, cam)
+
+    if bufferBox is not None:
+        bufferBox.draw(surface, cam)
+        bufferTime += 1
+        if bufferTime == 8:
+            bufferBox = None
+            bufferTime = None
 
     player.draw(surface, cam)
 
