@@ -15,10 +15,11 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, player):
     levelBorder.y = 150
 
     boxesCity.clear()
-    boxesRuins.clear()
     boxesCity.append(box.Box(50, 100, 150, 25))
     boxesCity.append(box.Box(250, 100, 100, 25))
     boxesCity.append(box.Box(370, 70, 100, 50))
+
+    boxesRuins.clear()
     boxesRuins.append(box.Box(50, 100, 150, 25))
     boxesRuins.append(box.Box(250, 100, 100, 25))
     boxesRuins.append(box.Box(170, 85, 100, 50))
