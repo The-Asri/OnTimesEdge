@@ -31,7 +31,10 @@ inCity = True
 bufferBox = None
 bufferTime = 0
 switchLock = False
+resetLock = False
 switchWarningTime = 8
+currentLevel = 1
+levelCount = 3
 
 def init():
     global screen
@@ -58,7 +61,7 @@ def init():
     ruinsWallpaper = ImageAssets.loadImage(2)
     cityBackground = ImageAssets.loadImage(3)
     ruinsBackground = ImageAssets.loadImage(4)
-    LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
 
 
@@ -75,19 +78,18 @@ def main():
 def update():
     global bufferBox
     global bufferTime
-    global inCity
     global switchLock
-    global currentBoxes
+    global resetLock
 
     if keyManager.key_escape:
-        pygame.quit()
-        exit()
-    if keyManager.key_reset:
-        LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
-        inCity = True
-        currentBoxes = boxesCity
+        quitGame()
+    if keyManager.key_reset and not resetLock:
+        reset()
     if keyManager.key_switch and not switchLock:
         switch()
+
+    if not keyManager.key_reset:
+        resetLock = False
     if not keyManager.key_switch:
         switchLock = False
 
@@ -98,6 +100,8 @@ def update():
         bufferTime -= 1
         if bufferTime <= 0:
             bufferBox = None
+
+    testBorder()
 
 def draw():
     surface.fill("Black")
@@ -123,6 +127,36 @@ def draw():
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
 
+def testBorder():
+    if player.getHitbox().x < 0:
+        player.x = -2
+        player.vx = 0
+    if player.getHitbox().y > levelBorder.y:
+        reset()
+    if player.getHitbox().x > levelBorder.x:
+        nextLevel()
+
+def reset():
+    global inCity
+    global currentBoxes
+    global resetLock
+
+    resetLock = True
+
+    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    inCity = True
+    currentBoxes = boxesCity
+
+def nextLevel():
+    global currentLevel
+
+    currentLevel += 1
+    if currentLevel <= levelCount:
+        reset()
+    else:
+        print("Won!")
+        quitGame()
+
 def switch():
     global switchLock
     global inCity
@@ -144,6 +178,10 @@ def switch():
             return
     inCity = not inCity
     currentBoxes = otherBoxes
+
+def quitGame():
+    pygame.quit()
+    exit()
 
 init()
 
