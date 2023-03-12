@@ -9,7 +9,7 @@ def loadLevel(id, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackg
     if id == 2:
         loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     if id == 3:
-        loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
 
 def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
     player.x = 50
@@ -18,8 +18,8 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.vy = 0
     levelBorder.x = 350
     levelBorder.y = 180
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    cityBackground = ImageAssets.loadImage(7)
+    ruinsBackground = ImageAssets.loadImage(8)
 
     boxesCity.clear()
     # same
@@ -41,30 +41,73 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
 
 
 def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
-    player.x = 50
+    player.x = 40
     player.y = 100 - 12 - 1
     player.vx = 0
     player.vy = 0
-    levelBorder.x = 300
-    levelBorder.y = 150
+    levelBorder.x = 360
+    levelBorder.y = 200
     cityBackground = ImageAssets.loadImage(1)
     ruinsBackground = ImageAssets.loadImage(2)
 
     boxesCity.clear()
     #same
-    boxesCity.append(box.Box(25, 100, 185, 50))
-    boxesCity.append(box.Box(225, 40, 75, 110))
+    boxesCity.append(box.Box(20, 100, 110, 150))
+    boxesCity.append(box.Box(105, 85, 20, 15, "Unslideable"))
+    boxesCity.append(box.Box(180, 140, 100, 150))
+    boxesCity.append(box.Box(300, 110, 100, 150))
     #dif
-    boxesCity.append(box.Box(175, 20, 10, 80))
-    boxesCity.append(box.Box(225, 0, 10, 40, "Unslideable"))
+    boxesCity.append(box.Box(260, 95, 4, 45))
+    boxesCity.append(box.Box(285, 0, 10, 20, "Unslideable"))
+    boxesCity.append(box.Box(305, 90, 20, 20, "Unslideable"))
 
     boxesRuins.clear()
     #same
-    boxesRuins.append(box.Box(25, 100, 185, 50))
-    boxesRuins.append(box.Box(225, 40, 75, 110))
+    boxesRuins.append(box.Box(20, 100, 110, 150))
+    boxesRuins.append(box.Box(105, 85, 20, 15, "Unslideable"))
+    boxesRuins.append(box.Box(180, 140, 100, 150))
+    boxesRuins.append(box.Box(300, 110, 100, 150))
     #dif
 
 
 def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
-    pass
+    player.x = 50
+    player.y = 200 - 12 - 1
+    player.vx = 0
+    player.vy = 0
+    levelBorder.x = 430
+    levelBorder.y = 300
+    cityBackground = ImageAssets.loadImage(7)
+    ruinsBackground = ImageAssets.loadImage(8)
+
+    boxesCity.clear()
+    # same
+    boxesCity.append(box.Box(0, 0, 180, 140))
+    boxesCity.append(box.Box(180, 0, 70, 120))
+    boxesCity.append(box.Box(0, 200, 150, 150))
+    boxesCity.append(box.Box(240, 200, 40, 105))
+    boxesCity.append(box.Box(280, 150, 200, 200))
+    boxesCity.append(box.Box(280, 70, 200, 40))
+    boxesCity.append(box.Box(360, 110, 200, 40))
+    # dif
+    boxesCity.append(box.Box(195, 130, 50, 15))
+    boxesCity.append(box.Box(285, 110, 5, 40, "Unslideable"))
+    boxesCity.append(box.Box(280, 35, 5, 35, "Unslideable"))
+
+    boxesRuins.clear()
+    # same
+    boxesRuins.append(box.Box(0, 0, 180, 140))
+    boxesRuins.append(box.Box(180, 0, 70, 120))
+    boxesRuins.append(box.Box(0, 200, 150, 150))
+    boxesRuins.append(box.Box(240, 200, 40, 105))
+    boxesRuins.append(box.Box(280, 150, 200, 200))
+    boxesRuins.append(box.Box(280, 70, 200, 40))
+    boxesRuins.append(box.Box(360, 110, 200, 40))
+    # dif
+    boxesRuins.append(box.Box(135, 190, 60, 10))
+    boxesRuins.append(box.Box(230, 130, 15, 50))
+    boxesRuins.append(box.Box(250, 80, 30, 20))
+    boxesRuins.append(box.Box(330, 140, 10, 10))
+    boxesRuins.append(box.Box(340, 125, 15, 25))
+
 

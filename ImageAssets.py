@@ -5,7 +5,7 @@ def loadImage(id):
         return pygame.image.load("graphics/CityWallpaper.png")
     if id == 2:
         return pygame.image.load("graphics/RuinsWallpaper.png")
-    if id == 3:
-        return pygame.image.load("graphics/TestLevelCity.png")
-    if id == 4:
-        return pygame.image.load("graphics/TestLevelRuins.png")
+    if id == 7:
+        return pygame.image.load("graphics/CityLevel3.png")
+    if id == 8:
+        return pygame.image.load("graphics/RuinsLevel3.png")

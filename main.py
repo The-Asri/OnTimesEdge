@@ -33,8 +33,10 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 1
+currentLevel = 3
 levelCount = 3
+
+renderLevel = False
 
 def init():
     global screen
@@ -59,10 +61,14 @@ def init():
     levelBorder = border.Border(0, 0)
     cityWallpaper = ImageAssets.loadImage(1)
     ruinsWallpaper = ImageAssets.loadImage(2)
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    cityBackground = ImageAssets.loadImage(7)
+    ruinsBackground = ImageAssets.loadImage(8)
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
+
+    if renderLevel:
+        saveLevel()
+        quitGame()
 
 
 def main():
@@ -109,13 +115,13 @@ def draw():
 
     if inCity:
         surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(cityBackground, (-cam.x, -cam.y))
+        surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
         surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
-        b.draw(surface, cam)
+        #b.draw(surface, cam)
         pass
 
     if bufferBox is not None:
@@ -182,6 +188,22 @@ def switch():
 def quitGame():
     pygame.quit()
     exit()
+
+
+def saveLevel():
+    citySurface = pygame.Surface((levelBorder.x, levelBorder.y))
+    cam.x = 0
+    cam.y = 0
+    for b in boxesCity:
+        b.draw(citySurface, cam)
+    pygame.image.save(citySurface, "exports/CityLayout.png")
+
+    ruinsSurface = pygame.Surface((levelBorder.x, levelBorder.y))
+    cam.x = 0
+    cam.y = 0
+    for b in boxesRuins:
+        b.draw(ruinsSurface, cam)
+    pygame.image.save(ruinsSurface, "exports/RuinsLayout.png")
 
 init()
 
