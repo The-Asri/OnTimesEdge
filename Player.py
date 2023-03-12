@@ -1,3 +1,4 @@
+import pygame
 import box
 
 gravity = 0.6
@@ -104,9 +105,9 @@ class Player(box.Box):
         for b in boxes:
             if b.isColliding(hb):
                 if self.vx > 0:
-                    self.x = b.x - hb.width + 2 - 0.069
+                    self.x = b.x - hb.width - 2 - 0.069
                 if self.vx < 0:
-                    self.x = b.x + b.width + 2 + 0.069
+                    self.x = b.x + b.width - 2 + 0.069
                 self.vx = 0
                 return
         self.x += self.vx
@@ -126,11 +127,15 @@ class Player(box.Box):
 
 
     def draw(self, s, c):
-        self.getHitbox().draw(s, c)
+        hb = self.getHitbox()
+        hb.width += 1
+        hb.height += 1
+        hb.draw(s, c)
+        #pygame.draw.rect(s, "Red", (self.x - c.x, self.y - c.y, self.width, self.height), 1)
 
 
     def getHitbox(self):
-        return box.Box(self.x - 2, self.y, 8, 12)
+        return box.Box(self.x + 2, self.y, 8, 12)
 
     def onGround(self, boxes):
         hb = self.getHitbox()
@@ -150,6 +155,6 @@ class Player(box.Box):
         else:
             hb.x += self.vx
         for b in boxes:
-            if b.isColliding(hb):
+            if b.isColliding(hb) and b.type == "Normal":
                 return True
         return False

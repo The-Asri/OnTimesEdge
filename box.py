@@ -2,18 +2,19 @@ import pygame.surface
 
 
 class Box:
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h, type="Normal"):
         self.x = x
         self.y = y
         self.width = w
         self.height = h
+        self.type = type
 
     def getPoints(self):
         return [[self.x, self.y], [self.x + self.width, self.y],
                 [self.x, self.y + self.height], [self.x + self.width, self.y + self.height]]
 
     def draw(self, s, c):
-        pygame.draw.rect(s, "Red", (self.x - c.x, self.y - c.y, self.width, self.height), 1)
+        pygame.draw.rect(s, "Red", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
 
     def isColliding(self, b):
         for point in b.getPoints():

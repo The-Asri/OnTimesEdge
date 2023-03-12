@@ -1,5 +1,13 @@
 import pygame
 
+key_left = pygame.K_a
+key_right = pygame.K_d
+key_up = pygame.K_w
+key_down = pygame.K_s
+key_jump = pygame.K_SPACE
+key_switch = pygame.K_e
+key_reset = pygame.K_r
+key_escape = pygame.K_ESCAPE
 
 class KeyManager:
     def __init__(self):
@@ -13,39 +21,37 @@ class KeyManager:
         self.key_escape = False
 
     def keyDown(self, key):
-        if key == pygame.K_a:
+        if key == key_left:
             self.key_left = True
-        if key == pygame.K_d:
+        if key == key_right:
             self.key_right = True
-        if key == pygame.K_w:
+        if key == key_up:
             self.key_up = True
-        if key == pygame.K_s:
+        if key == key_down:
             self.key_down = True
-        if key == pygame.K_SPACE:
+        if key == key_jump:
             self.key_jump = True
-        if key == pygame.K_e:
+        if key == key_switch:
             self.key_switch = True
-        if key == pygame.K_r:
+        if key == key_reset:
             self.key_reset = True
-        if key == pygame.K_ESCAPE:
+        if key == key_escape:
             self.key_escape = True
 
     def keyUp(self, key):
-        if key == pygame.K_a:
+        if key == key_left:
             self.key_left = False
-        if key == pygame.K_d:
+        if key == key_right:
             self.key_right = False
-        if key == pygame.K_w:
+        if key == key_up:
             self.key_up = False
-        if key == pygame.K_s:
+        if key == key_down:
             self.key_down = False
-        if key == pygame.K_SPACE:
+        if key == key_jump:
             self.key_jump = False
-        if key == pygame.K_e:
+        if key == key_switch:
             self.key_switch = False
-        if key == pygame.K_r:
+        if key == key_reset:
             self.key_reset = False
-        if key == pygame.K_ESCAPE:
+        if key == key_escape:
             self.key_escape = False
-
-

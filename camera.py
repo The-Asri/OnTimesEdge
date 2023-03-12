@@ -25,5 +25,5 @@ class Camera:
             dy = self.target.y - self.y - h / 2
             self.x += dx * factor
             self.y += dy * factor
-            self.x = border.getX(self.x, self.x + w)
-            self.y = border.getY(self.y, self.y + h)
+            self.x = int(border.getX(self.x, self.x + w))
+            self.y = int(border.getY(self.y, self.y + h))
