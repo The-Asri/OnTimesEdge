@@ -58,7 +58,7 @@ def init():
     ruinsWallpaper = ImageAssets.loadImage(2)
     cityBackground = ImageAssets.loadImage(3)
     ruinsBackground = ImageAssets.loadImage(4)
-    LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    LevelAssets.loadLevel(2, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
 
 
@@ -83,7 +83,7 @@ def update():
         pygame.quit()
         exit()
     if keyManager.key_reset:
-        LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        LevelAssets.loadLevel(2, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
         inCity = True
         currentBoxes = boxesCity
     if keyManager.key_switch and not switchLock:
