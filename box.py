@@ -21,6 +21,10 @@ class Box:
 
     def isColliding(self, b):
         for point in b.getPoints():
-            if self.x <= point[0] and point[0] <= self.x + self.width and self.y <= point[1] and point[1] <= self.y + self.height:
+            if self.x <= point[0] and point[0] <= self.x + self.width and self.y <= point[1] and point[
+                1] <= self.y + self.height:
+                return True
+        for point in self.getPoints():
+            if b.x <= point[0] and point[0] <= b.x + b.width and b.y <= point[1] and point[1] <= b.y + b.height:
                 return True
         return False

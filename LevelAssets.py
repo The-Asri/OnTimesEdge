@@ -12,7 +12,7 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.y = 100 - 12 - 1
     player.vx = 0
     player.vy = 0
-    levelBorder.x = 300
+    levelBorder.x = 330
     levelBorder.y = 180
     cityBackground = ImageAssets.loadImage(3)
     ruinsBackground = ImageAssets.loadImage(4)
@@ -21,8 +21,13 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     # same
     boxesCity.append(box.Box(0, 100, 150, 100))
     boxesCity.append(box.Box(180, 90, 150, 100))
+    boxesCity.append(box.Box(180, -50, 150, 100))
     # dif
+    boxesCity.append(box.Box(180, 50, 5, 40, type="Unslideable"))
 
     boxesRuins.clear()
     # same
+    boxesRuins.append(box.Box(0, 100, 150, 100))
+    boxesRuins.append(box.Box(180, 90, 150, 100))
+    boxesRuins.append(box.Box(180, -50, 150, 100))
     # dif

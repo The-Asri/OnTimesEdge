@@ -1,4 +1,5 @@
 factor = 0.25
+yOffset = 10
 
 
 class Target:
@@ -11,8 +12,8 @@ class Camera:
     def __init__(self, w, h, border, target=None):
         self.target = target
         if target is not None:
-            x = target.x - w / 2
-            y = target.y - h / 2
+            x = (target.x + target.width / 2) - w / 2
+            y = (target.y + target.height / 2 - yOffset) - h / 2
             self.x = border.getX(x, x + w)
             self.y = border.getY(y, y + h)
         else:
@@ -21,8 +22,8 @@ class Camera:
 
     def update(self, w, h, border):
         if self.target is not None:
-            dx = self.target.x - self.x - w / 2
-            dy = self.target.y - self.y - h / 2
+            dx = (self.target.x + self.target.width / 2) - self.x - w / 2
+            dy = (self.target.y + self.target.height / 2 - yOffset) - self.y - h / 2
             self.x += dx * factor
             self.y += dy * factor
             self.x = int(self.x)
