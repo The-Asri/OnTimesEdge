@@ -18,3 +18,4 @@ def loadLevel1(boxes, levelBorder, player):
     boxes.append(box.Box(50, 100, 150, 25))
     boxes.append(box.Box(250, 100, 100, 25))
     boxes.append(box.Box(370, 70, 100, 50))
+    boxes.append(box.Box(300, 50, 20, 30))
