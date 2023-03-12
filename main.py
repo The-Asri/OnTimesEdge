@@ -20,6 +20,9 @@ width = trueWidth * upscale
 height = trueHeight * upscale
 cityBackground = None
 ruinsBackground = None
+cityWallpaper = None
+ruinsWallpaper = None
+paralaxFactor = 8
 player = None
 boxesCity = []
 boxesRuins = []
@@ -39,6 +42,8 @@ def init():
     global levelBorder
     global cityBackground
     global ruinsBackground
+    global cityWallpaper
+    global ruinsWallpaper
     global player
 
     pygame.init()
@@ -49,8 +54,10 @@ def init():
     keyManager = KeyManager.KeyManager()
     player = Player.Player(0, 0)
     levelBorder = border.Border(0, 0)
-    cityBackground = ImageAssets.loadImage(1)
-    ruinsBackground = ImageAssets.loadImage(2)
+    cityWallpaper = ImageAssets.loadImage(1)
+    ruinsWallpaper = ImageAssets.loadImage(2)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
     LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
 
@@ -98,12 +105,14 @@ def draw():
     # draw below here!
 
     if inCity:
-        surface.blit(cityBackground, (-cam.x, -cam.y))
+        surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
+        #surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
-        surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
+        #surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
-        # b.draw(surface, cam)
+        b.draw(surface, cam)
         pass
 
     if bufferBox is not None:

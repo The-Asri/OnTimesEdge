@@ -14,7 +14,10 @@ class Box:
                 [self.x, self.y + self.height], [self.x + self.width, self.y + self.height]]
 
     def draw(self, s, c):
-        pygame.draw.rect(s, "Red", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
+        if self.type == "Normal":
+            pygame.draw.rect(s, "Red", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
+        elif self.type == "Unslideable":
+            pygame.draw.rect(s, "Cyan", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
 
     def isColliding(self, b):
         for point in b.getPoints():

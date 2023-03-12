@@ -11,8 +11,8 @@ friction_standing = 0.6
 friction_running = 0.85
 friction_jumping = 0.95
 jumpSpeedBoost = 1.25
-jumpBoost = 1.35
-jumpStop = 0.9
+jumpBoost = 1.2
+jumpStop = 1.1
 wallJumpPower = 4
 
 class Player(box.Box):
@@ -54,11 +54,11 @@ class Player(box.Box):
                 self.vy -= (jumpPower + abs(self.vx)) / jumpCap
 
                 if state == "left" and self.vx > 0:
-                    self.vx *= jumpStop
                     self.vy -= abs(self.vx) * jumpBoost
+                    self.vx *= jumpStop
                 elif state == "right" and self.vx < 0:
-                    self.vx *= jumpStop
                     self.vy -= abs(self.vx) * jumpBoost
+                    self.vx *= jumpStop
                 else:
                     self.vx *= jumpSpeedBoost
         else:
