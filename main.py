@@ -77,6 +77,7 @@ def update():
     global bufferTime
     global inCity
     global switchLock
+    global currentBoxes
 
     if keyManager.key_escape:
         pygame.quit()
@@ -84,15 +85,13 @@ def update():
     if keyManager.key_reset:
         LevelAssets.loadLevel(1, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
         inCity = True
+        currentBoxes = boxesCity
     if keyManager.key_switch and not switchLock:
         switch()
     if not keyManager.key_switch:
         switchLock = False
 
-    if inCity:
-        player.update(boxesCity, keyManager)
-    else:
-        player.update(boxesRuins, keyManager)
+    player.update(currentBoxes, keyManager)
     cam.update(trueWidth, trueHeight, levelBorder)
 
     if bufferTime > 0:
