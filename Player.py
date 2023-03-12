@@ -5,28 +5,39 @@ gravityCap = 0.2
 jumpPower = 4
 jumpCap = 1.5
 speed = 0.5
-friction_standing = 0.5
+arialSpeed = 0.1
+friction_standing = 0.6
 friction_running = 0.85
-friction_jumping = 0.99
+friction_jumping = 0.95
 jumpSpeedBoost = 1.25
 jumpBoost = 1.35
-jumpStop = 0.85
+jumpStop = 0.9
+wallJumpPower = 4
 
 class Player(box.Box):
     def __init__(self, x, y):
         super().__init__(x, y, 12, 12)
         self.vx = 0
         self.vy = 0
+        self.direction = "right"
+        self.sliding = False
+        self.jumpLock = False
 
     def update(self, boxes, keyManager):
-        if self.onGround(boxes):
-            self.vy = 0
+        if not keyManager.key_jump:
+            self.jumpLock = False
 
-            state = "standing"
-            if keyManager.key_left and not keyManager.key_right:
-                state = "left"
-            if not keyManager.key_left and keyManager.key_right:
-                state = "right"
+        state = "standing"
+        if keyManager.key_left and not keyManager.key_right:
+            state = "left"
+        if not keyManager.key_left and keyManager.key_right:
+            state = "right"
+
+        if self.onGround(boxes):
+            if self.sliding:
+                self.sliding = False
+
+            self.vy = 0
 
             if state == "left":
                 self.vx -= speed
@@ -37,7 +48,8 @@ class Player(box.Box):
             if state == "standing":
                 self.vx *= friction_standing
 
-            if keyManager.key_jump:
+            if keyManager.key_jump and not self.jumpLock:
+                self.jumpLock = True
                 self.vy -= (jumpPower + abs(self.vx)) / jumpCap
 
                 if state == "left" and self.vx > 0:
@@ -48,13 +60,40 @@ class Player(box.Box):
                     self.vy -= abs(self.vx) * jumpBoost
                 else:
                     self.vx *= jumpSpeedBoost
-
         else:
             self.vx *= friction_jumping
+            if state == "left":
+                self.vx -= arialSpeed
+            if state == "right":
+                self.vx += arialSpeed
 
-        self.vy += gravity
-        if keyManager.key_jump:
-            self.vy -= gravityCap
+            if self.onWall(boxes):
+                self.sliding = True
+                self.moveX(boxes)
+
+        if self.sliding:
+            self.vy = min(gravity, self.vy + gravity)
+            if not self.onWall(boxes):
+                self.sliding = False
+            if self.direction != state:
+                self.sliding = False
+            if keyManager.key_jump and not self.jumpLock:
+                self.jumpLock = True
+                if self.direction == "right":
+                    self.vx -= wallJumpPower
+                if self.direction == "left":
+                    self.vx += wallJumpPower
+                self.vy -= jumpPower
+                self.sliding = False
+        else:
+            self.vy += gravity
+            if keyManager.key_jump:
+                self.vy -= gravityCap
+
+        if self.vx > 0:
+            self.direction = "right"
+        if self.vx < 0:
+            self.direction = "left"
 
         self.moveX(boxes)
         self.moveY(boxes)
@@ -93,10 +132,23 @@ class Player(box.Box):
     def getHitbox(self):
         return box.Box(self.x - 2, self.y, 8, 12)
 
-
     def onGround(self, boxes):
         hb = self.getHitbox()
         hb.y += 1
+        for b in boxes:
+            if b.isColliding(hb):
+                return True
+        return False
+
+    def onWall(self, boxes):
+        hb = self.getHitbox()
+        if self.sliding:
+            if self.direction == "right":
+                hb.x += 1
+            if self.direction == "left":
+                hb.x -= 1
+        else:
+            hb.x += self.vx
         for b in boxes:
             if b.isColliding(hb):
                 return True
