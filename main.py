@@ -24,6 +24,7 @@ cityWallpaper = None
 ruinsWallpaper = None
 paralaxFactor = 8
 player = None
+levelBorder = None
 boxesCity = []
 boxesRuins = []
 currentBoxes = boxesCity
@@ -38,6 +39,7 @@ levelCount = 4
 fps = 30
 
 renderLevel = False
+
 
 def init():
     global screen
@@ -112,16 +114,17 @@ def update():
 
     testBorder()
 
+
 def draw():
     surface.fill("Black")
     # draw below here!
 
     if inCity:
         surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(cityBackground, (-cam.x, -cam.y))
+        # surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
         surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        # surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
         b.draw(surface, cam)
@@ -131,9 +134,10 @@ def draw():
 
     player.draw(surface, cam)
 
-    # dont edit this code below
+    # don't edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
+
 
 def testBorder():
     if player.getHitbox().x < 0:
@@ -143,6 +147,7 @@ def testBorder():
         reset()
     if player.getHitbox().x > levelBorder.x:
         nextLevel()
+
 
 def reset():
     global inCity
@@ -156,6 +161,7 @@ def reset():
     currentBoxes = boxesCity
     player.isDead = False
 
+
 def nextLevel():
     global currentLevel
 
@@ -165,6 +171,7 @@ def nextLevel():
     else:
         print("Won!")
         quitGame()
+
 
 def switch():
     global switchLock
@@ -188,6 +195,7 @@ def switch():
     inCity = not inCity
     currentBoxes = otherBoxes
 
+
 def quitGame():
     pygame.quit()
     exit()
@@ -207,6 +215,7 @@ def saveLevel():
     for b in boxesRuins:
         b.draw(ruinsSurface, cam)
     pygame.image.save(ruinsSurface, "exports/RuinsLayout.png")
+
 
 init()
 
