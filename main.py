@@ -100,6 +100,8 @@ def update():
         switchLock = False
 
     player.update(currentBoxes, keyManager)
+    if player.isDead:
+        reset()
     cam.update(trueWidth, trueHeight, levelBorder)
 
     if bufferTime > 0:
@@ -115,13 +117,13 @@ def draw():
 
     if inCity:
         surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        surface.blit(cityBackground, (-cam.x, -cam.y))
+        #surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
         surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        #surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
-        #b.draw(surface, cam)
+        b.draw(surface, cam)
         pass
 
     if bufferBox is not None:
@@ -152,6 +154,7 @@ def reset():
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     inCity = True
     currentBoxes = boxesCity
+    player.isDead = False
 
 def nextLevel():
     global currentLevel

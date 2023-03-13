@@ -18,6 +18,8 @@ class Box:
             pygame.draw.rect(s, "Red", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
         elif self.type == "Unslideable":
             pygame.draw.rect(s, "Cyan", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
+        elif self.type == "Spike":
+            pygame.draw.rect(s, "Violet", (int(self.x) - c.x, int(self.y) - c.y, self.width, self.height), 1)
 
     def isColliding(self, b):
         for point in b.getPoints():

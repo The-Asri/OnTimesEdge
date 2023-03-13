@@ -15,6 +15,7 @@ jumpBoost = 1.2
 jumpStop = 1.1
 wallJumpPower = 4
 
+
 class Player(box.Box):
     def __init__(self, x, y):
         super().__init__(x, y, 12, 12)
@@ -23,6 +24,7 @@ class Player(box.Box):
         self.direction = "right"
         self.sliding = False
         self.jumpLock = False
+        self.isDead = False
 
     def update(self, boxes, keyManager):
         if not keyManager.key_jump:
@@ -104,6 +106,8 @@ class Player(box.Box):
         hb.x += self.vx
         for b in boxes:
             if b.isColliding(hb):
+                if b.type == "Spike":
+                    self.isDead = True
                 if self.vx > 0:
                     self.x = b.x - hb.width - 2 - 0.069
                 if self.vx < 0:
@@ -117,6 +121,8 @@ class Player(box.Box):
         hb.y += self.vy
         for b in boxes:
             if b.isColliding(hb):
+                if b.type == "Spike":
+                    self.isDead = True
                 if self.vy > 0:
                     self.y = b.y - hb.height - 0.069
                 if self.vy < 0:
@@ -141,7 +147,7 @@ class Player(box.Box):
         hb = self.getHitbox()
         hb.y += 1
         for b in boxes:
-            if b.isColliding(hb):
+            if b.isColliding(hb) and b.type != "Spike":
                 return True
         return False
 

@@ -82,6 +82,7 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
 
     boxesCity.clear()
     # same
+    boxesCity.append(box.Box(100, 190, 10, 10, "Spike"))
     boxesCity.append(box.Box(0, 0, 180, 140))
     boxesCity.append(box.Box(180, 0, 70, 120))
     boxesCity.append(box.Box(0, 200, 150, 150))
