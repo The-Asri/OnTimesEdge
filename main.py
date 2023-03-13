@@ -33,7 +33,7 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 3
+currentLevel = 2
 levelCount = 3
 
 renderLevel = False
@@ -124,7 +124,6 @@ def draw():
 
     for b in currentBoxes:
         b.draw(surface, cam)
-        pass
 
     if bufferBox is not None:
         bufferBox.draw(surface, cam)
