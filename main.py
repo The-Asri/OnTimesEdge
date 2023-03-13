@@ -33,7 +33,7 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 1
+currentLevel = 4
 levelCount = 4
 fps = 30
 
