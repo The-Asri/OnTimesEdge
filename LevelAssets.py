@@ -96,10 +96,11 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesCity.append(box.Box(280, 150, 200, 200))
     boxesCity.append(box.Box(280, 70, 200, 40))
     boxesCity.append(box.Box(360, 110, 200, 40))
+    boxesCity.append(box.Box(380, 55, 20, 15))
     # dif
     boxesCity.append(box.Box(195, 130, 50, 15))
     boxesCity.append(box.Box(285, 110, 5, 40, "Unslideable"))
-    boxesCity.append(box.Box(280, 35, 5, 35, "Unslideable"))
+    boxesCity.append(box.Box(280, 15, 5, 55, "Unslideable"))
 
     boxesRuins.clear()
     # same
@@ -110,10 +111,11 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesRuins.append(box.Box(280, 150, 200, 200))
     boxesRuins.append(box.Box(280, 70, 200, 40))
     boxesRuins.append(box.Box(360, 110, 200, 40))
+    boxesRuins.append(box.Box(380, 55, 20, 15))
     # dif
     boxesRuins.append(box.Box(135, 190, 60, 10))
     boxesRuins.append(box.Box(230, 130, 15, 50))
-    boxesRuins.append(box.Box(250, 80, 30, 20))
+    boxesRuins.append(box.Box(250, 60, 30, 20))
     boxesRuins.append(box.Box(330, 140, 10, 10))
     boxesRuins.append(box.Box(340, 125, 15, 25))
 

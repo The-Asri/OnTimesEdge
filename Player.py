@@ -3,17 +3,18 @@ import box
 
 gravity = 0.6
 gravityCap = 0.2
-jumpPower = 4
-jumpCap = 1.5
-speed = 0.5
-arialSpeed = 0.1
-friction_standing = 0.6
-friction_running = 0.85
+jumpPower = 5
+jumpCap = 1.75
+speed = 1
+arialSpeed = 0.15
+friction_standing = 0.5
+friction_running = 0.75
 friction_jumping = 0.95
 jumpSpeedBoost = 1.25
 jumpBoost = 1.2
 jumpStop = 1.1
-wallJumpPower = 4
+wallJumpPower = 5
+wallKickPower = 4
 
 
 class Player(box.Box):
@@ -83,10 +84,10 @@ class Player(box.Box):
             if keyManager.key_jump and not self.jumpLock:
                 self.jumpLock = True
                 if self.direction == "right":
-                    self.vx -= wallJumpPower
+                    self.vx -= wallKickPower
                 if self.direction == "left":
-                    self.vx += wallJumpPower
-                self.vy -= jumpPower
+                    self.vx += wallKickPower
+                self.vy -= wallJumpPower
                 self.sliding = False
         else:
             self.vy += gravity
