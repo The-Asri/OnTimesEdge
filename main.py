@@ -34,7 +34,7 @@ switchLock = False
 resetLock = False
 switchWarningTime = 8
 currentLevel = 1
-levelCount = 3
+levelCount = 4
 fps = 30
 
 renderLevel = False
