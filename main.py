@@ -22,7 +22,7 @@ cityBackground = None
 ruinsBackground = None
 cityWallpaper = None
 ruinsWallpaper = None
-paralaxFactor = 8
+parallaxFactor = 8
 player = None
 levelBorder = None
 boxesCity = []
@@ -120,10 +120,10 @@ def draw():
     # draw below here!
 
     if inCity:
-        surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
+        surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
         # surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
-        surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
+        surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
         # surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
