@@ -88,11 +88,12 @@ class Player(box.Box):
                 self.sliding = False
             if keyManager.key_jump and not self.jumpLock:
                 self.jumpLock = True
+                self.wallJumpDelay = 0
                 if self.direction == "right":
                     self.vx -= wallKickPower
                 if self.direction == "left":
                     self.vx += wallKickPower
-                self.vy -= wallJumpPower
+                self.vy = -wallJumpPower
                 self.sliding = False
         else:
             self.vy += gravity
