@@ -45,7 +45,7 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.y = 100 - 12 - 1
     player.vx = 0
     player.vy = 0
-    levelBorder.x = 380
+    levelBorder.x = 430
     levelBorder.y = 200
     cityBackground = ImageAssets.loadImage(1)
     ruinsBackground = ImageAssets.loadImage(2)
@@ -53,27 +53,26 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesCity.clear()
     #same
     boxesCity.append(box.Box(20, 100, 110, 150))
-    boxesCity.append(box.Box(240, 140, 60, 150))
-    boxesCity.append(box.Box(320, 110, 100, 150))
+    boxesCity.append(box.Box(260, 140, 70, 150))
+    boxesCity.append(box.Box(350, 110, 100, 150))
     #dif
-    boxesCity.append(box.Box(126, 55, 4, 45, "Unslideable"))
+    boxesCity.append(box.Box(125, 55, 5, 45, "Unslideable"))
 
     boxesCity.append(box.Box(170, 110, 8, 150, "Unslideable"))
     boxesCity.append(box.Box(150, 115, 20, 12, "Unslideable"))
     boxesCity.append(box.Box(178, 115, 20, 12, "Unslideable"))
 
-    boxesCity.append(box.Box(280, 95, 4, 45))
-    boxesCity.append(box.Box(280, 90, 4, 5, "Spike"))
-    boxesCity.append(box.Box(305, 0, 10, 20, "Unslideable"))
-    boxesCity.append(box.Box(335, 60, 4, 50, "Spike"))
+    boxesCity.append(box.Box(290, 95, 5, 45))
+    boxesCity.append(box.Box(290, 90, 5, 5, "Spike"))
+    boxesCity.append(box.Box(355, 60, 5, 50, "Spike"))
 
     boxesRuins.clear()
     #same
     boxesRuins.append(box.Box(20, 100, 110, 150))
-    boxesRuins.append(box.Box(240, 140, 60, 150))
-    boxesRuins.append(box.Box(320, 110, 100, 150))
+    boxesRuins.append(box.Box(260, 140, 70, 150))
+    boxesRuins.append(box.Box(350, 110, 100, 150))
     #dif
-    boxesRuins.append(box.Box(95, 96, 35, 4, "Unslideable"))
+    boxesRuins.append(box.Box(95, 95, 35, 5, "Unslideable"))
 
 
 def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
@@ -88,7 +87,6 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
 
     boxesCity.clear()
     # same
-    boxesCity.append(box.Box(100, 190, 10, 10, "Spike"))
     boxesCity.append(box.Box(0, 0, 180, 140))
     boxesCity.append(box.Box(180, 0, 70, 120))
     boxesCity.append(box.Box(0, 200, 150, 150))
@@ -100,7 +98,8 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     # dif
     boxesCity.append(box.Box(195, 130, 50, 15))
     boxesCity.append(box.Box(285, 110, 5, 40, "Unslideable"))
-    boxesCity.append(box.Box(280, 15, 5, 55, "Unslideable"))
+    boxesCity.append(box.Box(280, 30, 5, 40, "Unslideable"))
+    boxesCity.append(box.Box(280, 25, 5, 5, "Spike"))
 
     boxesRuins.clear()
     # same

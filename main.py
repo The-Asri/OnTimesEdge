@@ -33,7 +33,7 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 2
+currentLevel = 3
 levelCount = 3
 
 renderLevel = False

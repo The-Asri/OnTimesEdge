@@ -15,6 +15,7 @@ jumpBoost = 1.2
 jumpStop = 1.1
 wallJumpPower = 5
 wallKickPower = 4
+wallJumpTicks = 5
 
 
 class Player(box.Box):
@@ -26,6 +27,7 @@ class Player(box.Box):
         self.sliding = False
         self.jumpLock = False
         self.isDead = False
+        self.wallJumpDelay = 0
 
     def update(self, boxes, keyManager):
         if not keyManager.key_jump:
@@ -73,9 +75,12 @@ class Player(box.Box):
 
             if self.onWall(boxes):
                 self.sliding = True
+                self.wallJumpDelay = wallJumpTicks
                 self.moveX(boxes)
 
-        if self.sliding:
+        if self.sliding or self.wallJumpDelay > 0:
+            if not self.sliding:
+                self.wallJumpDelay -= 1
             self.vy = min(gravity, self.vy + gravity)
             if not self.onWall(boxes):
                 self.sliding = False
@@ -94,9 +99,9 @@ class Player(box.Box):
             if keyManager.key_jump:
                 self.vy -= gravityCap
 
-        if self.vx > 0:
+        if self.vx > 0 and self.wallJumpDelay <= 0:
             self.direction = "right"
-        if self.vx < 0:
+        if self.vx < 0 and self.wallJumpDelay <= 0:
             self.direction = "left"
 
         self.moveX(boxes)
