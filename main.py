@@ -34,8 +34,9 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 2
+currentLevel = 1
 levelCount = 4
+fps = 30
 
 renderLevel = False
 
@@ -80,7 +81,7 @@ def main():
     draw()
 
     pygame.display.update()
-    clock.tick(30)
+    clock.tick(fps)
 
 
 def update():
