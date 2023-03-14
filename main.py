@@ -169,8 +169,8 @@ def nextLevel():
 
     currentLevel += 1
     if currentLevel <= levelCount:
-        #if currentLevel == :
-        #    SoundAssets.clearMusic()
+        if currentLevel == 2:
+            SoundAssets.clearMusic()
         reset()
     else:
         print("Won!")
