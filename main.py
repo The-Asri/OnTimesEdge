@@ -40,6 +40,9 @@ switchWarningTime = 8
 currentLevel = 1
 levelCount = 4
 fps = 30
+ticks = 0
+ticking = False
+winScreen = False
 
 renderLevel = False
 
@@ -94,48 +97,78 @@ def update():
     global bufferTime
     global switchLock
     global resetLock
+    global ticks
+    global ticking
+    global currentLevel
+    global winScreen
 
-    if keyManager.key_escape:
-        quitGame()
-    if keyManager.key_reset and not resetLock:
-        reset()
-    if keyManager.key_switch and not switchLock:
-        switch()
+    if winScreen:
+        if keyManager.key_reset:
+            currentLevel = 1
+            ticks = 0
+            reset()
+            winScreen = False
+    else:
+        if ticking:
+            ticks += 1
+        else:
+            if keyManager.key_left or keyManager.key_right or keyManager.key_jump:
+                ticking = True
 
-    if not keyManager.key_reset:
-        resetLock = False
-    if not keyManager.key_switch:
-        switchLock = False
+        if keyManager.key_reset and not resetLock:
+            soundHandler.playSound("jump")
+            reset()
+        if keyManager.key_switch and not switchLock:
+            switch()
+
+        if not keyManager.key_reset:
+            resetLock = False
+        if not keyManager.key_switch:
+            switchLock = False
 
     player.update(currentBoxes, keyManager, soundHandler)
     if player.isDead:
         reset()
     cam.update(trueWidth, trueHeight, levelBorder)
 
-    if bufferTime > 0:
-        bufferTime -= 1
-        if bufferTime <= 0:
-            bufferBox = None
+        if bufferTime > 0:
+            bufferTime -= 1
+            if bufferTime <= 0:
+                bufferBox = None
 
     testBorder()
+
+    if keyManager.key_escape:
+        quitGame()
 
 
 def draw():
     surface.fill("Black")
     # draw below here!
-
-    if inCity:
+    if winScreen:
         surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-        # surface.blit(cityBackground, (-cam.x, -cam.y))
+        font = pygame.font.SysFont(None, 20)
+        img = font.render("Time: " + str(int(ticks / fps * 100) / 100) + " Seconds", False, "Yellow")
+        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2))
+        img = font.render("Press [R] to try again", False, "Yellow")
+        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2 + 20))
     else:
-        surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-        # surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        if inCity:
+            surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
+            # surface.blit(cityBackground, (-cam.x, -cam.y))
+        else:
+            surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
+            # surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
-    for b in currentBoxes:
-        b.draw(surface, cam)
+        for b in currentBoxes:
+            b.draw(surface, cam)
 
-    if bufferBox is not None:
-        bufferBox.draw(surface, cam)
+        if bufferBox is not None:
+            bufferBox.draw(surface, cam)
+
+        font = pygame.font.SysFont(None, 20)
+        img = font.render(str(int(ticks / fps * 100) / 100), False, "Yellow")
+        surface.blit(img, (2, 2))
 
     player.draw(surface, cam, currentBoxes)
 
@@ -170,13 +203,15 @@ def reset():
 
 def nextLevel():
     global currentLevel
+    global ticking
+    global winScreen
 
     currentLevel += 1
     if currentLevel <= levelCount:
         reset()
     else:
-        print("Won!")
-        quitGame()
+        ticking = False
+        winScreen = True
 
 
 def switch():
