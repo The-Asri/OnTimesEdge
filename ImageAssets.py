@@ -9,3 +9,5 @@ def loadImage(id):
         return pygame.image.load("graphics/CityLevel3.png")
     if id == 8:
         return pygame.image.load("graphics/RuinsLevel3.png")
+    if id == 9:
+        return pygame.image.load("graphics/Player.png")

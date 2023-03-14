@@ -1,5 +1,6 @@
 import pygame
 import box
+import ImageAssets
 
 gravity = 0.6
 gravityCap = 0.2
@@ -17,6 +18,8 @@ jumpStop = 1.1
 wallJumpPower = 5
 wallKickPower = 4
 wallJumpTicks = 5
+startRunning = 1.5
+animationSpeed = 5
 
 
 class Player(box.Box):
@@ -29,6 +32,10 @@ class Player(box.Box):
         self.jumpLock = False
         self.isDead = False
         self.wallJumpDelay = 0
+        self.index = 0
+        self.ticks = 0
+        self.sheet = ImageAssets.loadImage(9)
+        self.landed = False
 
     def update(self, boxes, keyManager):
         if not keyManager.key_jump:
@@ -56,6 +63,7 @@ class Player(box.Box):
                 self.vx *= friction_standing
 
             if keyManager.key_jump and not self.jumpLock:
+                self.index = 0
                 self.jumpLock = True
                 self.vy -= (jumpPower + abs(self.vx)) / jumpCap
 
@@ -88,6 +96,7 @@ class Player(box.Box):
             if self.direction != state:
                 self.sliding = False
             if keyManager.key_jump and not self.jumpLock:
+                self.index = 2
                 self.jumpLock = True
                 self.wallJumpDelay = 0
                 if self.direction == "right":
@@ -143,12 +152,48 @@ class Player(box.Box):
         self.y += self.vy
 
 
-    def draw(self, s, c):
-        hb = self.getHitbox()
-        hb.width += 1
-        hb.height += 1
-        hb.draw(s, c)
+    def draw(self, s, c, boxes):
+        #hb = self.getHitbox()
+        #hb.width += 1
+        #hb.height += 1
+        #hb.draw(s, c)
         #pygame.draw.rect(s, "Red", (self.x - c.x, self.y - c.y, self.width, self.height), 1)
+
+        s.blit(self.sheet, (self.x - c.x, self.y - c.y, self.width, self.height), self.getCrop(boxes))
+
+
+    def getCrop(self, boxes):
+        x = 0
+        y = self.direction == "left"
+
+        if self.onWall(boxes):
+            x = 6
+        elif not self.onGround(boxes):
+            self.landed = True
+            if self.index == 2:
+                self.index = 4
+            else:
+                if self.vy > 0:
+                    self.index = 1
+
+            x = self.index + 3
+        elif abs(self.vx) > startRunning:
+            self.ticks += 1
+
+            if self.ticks >= animationSpeed:
+                self.ticks = 0
+                self.index = (self.index + 1) % 2
+            x = self.index + 1
+        else:
+            if self.landed:
+                x = 5
+                self.ticks += 1
+                if self.ticks > animationSpeed:
+                    self.landed = False
+            else:
+                self.ticks = 0
+
+        return (x * 13, y * 13, 13, 13)
 
 
     def getHitbox(self):

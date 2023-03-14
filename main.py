@@ -132,7 +132,7 @@ def draw():
     if bufferBox is not None:
         bufferBox.draw(surface, cam)
 
-    player.draw(surface, cam)
+    player.draw(surface, cam, currentBoxes)
 
     # don't edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
