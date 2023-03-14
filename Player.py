@@ -7,10 +7,11 @@ gravityCap = 0.2
 jumpPower = 5
 jumpCap = 1.75
 speed = 1
-arialSpeed = 0.15
+arialSpeed = 0.175
 friction_standing = 0.5
 friction_running = 0.75
 friction_jumping = 0.95
+fall_cap = 6
 jumpSpeedBoost = 1.25
 jumpBoost = 1.2
 jumpStop = 1.1
@@ -106,6 +107,9 @@ class Player(box.Box):
             self.direction = "right"
         if self.vx < 0 and self.wallJumpDelay <= 0:
             self.direction = "left"
+
+        if self.vy > fall_cap:
+            self.vy = fall_cap
 
         self.moveX(boxes)
         self.moveY(boxes)
