@@ -115,7 +115,7 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesRuins.append(box.Box(360, 110, 200, 40))
     boxesRuins.append(box.Box(380, 55, 20, 15))
     # dif
-    boxesRuins.append(box.Box(135, 190, 60, 10))
+    boxesRuins.append(box.Box(135, 190, 60, 10, "Unslideable"))
     boxesRuins.append(box.Box(230, 130, 15, 50))
     boxesRuins.append(box.Box(250, 60, 30, 20))
     boxesRuins.append(box.Box(330, 140, 10, 10))
