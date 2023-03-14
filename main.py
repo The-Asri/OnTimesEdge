@@ -126,17 +126,17 @@ def update():
         if not keyManager.key_switch:
             switchLock = False
 
-        player.update(currentBoxes, keyManager)
-        if player.isDead:
-            reset()
-        cam.update(trueWidth, trueHeight, levelBorder)
+    player.update(currentBoxes, keyManager, soundHandler)
+    if player.isDead:
+        reset()
+    cam.update(trueWidth, trueHeight, levelBorder)
 
-        if bufferTime > 0:
-            bufferTime -= 1
-            if bufferTime <= 0:
-                bufferBox = None
+    if bufferTime > 0:
+        bufferTime -= 1
+        if bufferTime <= 0:
+            bufferBox = None
 
-        testBorder()
+    testBorder()
 
     if keyManager.key_escape:
         quitGame()
@@ -193,6 +193,7 @@ def reset():
     global resetLock
 
     resetLock = True
+    soundHandler.playSound("death")
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     inCity = True

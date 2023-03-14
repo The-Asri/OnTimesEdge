@@ -38,7 +38,7 @@ class Player(box.Box):
         self.sheet = ImageAssets.loadImage(9)
         self.landed = False
 
-    def update(self, boxes, keyManager):
+    def update(self, boxes, keyManager, soundHandler):
         if not keyManager.key_jump:
             self.jumpLock = False
 
@@ -64,6 +64,7 @@ class Player(box.Box):
                 self.vx *= friction_standing
 
             if keyManager.key_jump and not self.jumpLock:
+                soundHandler.playSound("jump")
                 self.index = 0
                 self.jumpLock = True
                 self.vy -= (jumpPower + abs(self.vx)) / jumpCap
@@ -97,6 +98,7 @@ class Player(box.Box):
             if self.direction != state:
                 self.sliding = False
             if keyManager.key_jump and not self.jumpLock:
+                soundHandler.playSound("walljump")
                 self.index = 2
                 self.jumpLock = True
                 self.wallJumpDelay = 0
