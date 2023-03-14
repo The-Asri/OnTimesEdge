@@ -9,7 +9,8 @@ class SoundHandler:
         self.background_sfx = "./sounds/background.mp3"
         self.sfx = {
                     "jump": mixer.Sound("./sounds/jump.mp3"),
-                    "death": mixer.Sound("./sounds/death.mp3")
+                    "death": mixer.Sound("./sounds/death.mp3"),
+                    "walljump": mixer.Sound("./sounds/jump.mp3")
                     }
         mixer.music.load(self.background_sfx)
 

@@ -98,7 +98,6 @@ def update():
     if keyManager.key_escape:
         quitGame()
     if keyManager.key_reset and not resetLock:
-        soundHandler.playSound("jump")
         reset()
     if keyManager.key_switch and not switchLock:
         switch()
@@ -108,7 +107,7 @@ def update():
     if not keyManager.key_switch:
         switchLock = False
 
-    player.update(currentBoxes, keyManager)
+    player.update(currentBoxes, keyManager, soundHandler)
     if player.isDead:
         reset()
     cam.update(trueWidth, trueHeight, levelBorder)
@@ -161,6 +160,7 @@ def reset():
     global resetLock
 
     resetLock = True
+    soundHandler.playSound("death")
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     inCity = True
