@@ -2,6 +2,7 @@ import box
 import border
 import Player
 import ImageAssets
+import SoundAssets
 
 def loadLevel(id, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
     if id == 1:
@@ -22,6 +23,7 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     levelBorder.y = 180
     cityBackground = ImageAssets.loadImage(7)
     ruinsBackground = ImageAssets.loadImage(8)
+    SoundAssets.loadMusic(1)
 
     boxesCity.clear()
     # same
@@ -51,6 +53,7 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     levelBorder.y = 200
     cityBackground = ImageAssets.loadImage(1)
     ruinsBackground = ImageAssets.loadImage(2)
+    SoundAssets.loadMusic(2)
 
     boxesCity.clear()
     #same
@@ -66,7 +69,7 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
 
     boxesCity.append(box.Box(290, 95, 5, 45))
     boxesCity.append(box.Box(290, 90, 5, 5, "Spike"))
-    boxesCity.append(box.Box(355, 60, 5, 50, "Spike"))
+    boxesCity.append(box.Box(355, 65, 5, 45, "Spike"))
 
     boxesRuins.clear()
     #same

@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 import eventHandler
 import KeyManager
 import camera
@@ -7,6 +8,7 @@ import border
 import Player
 import LevelAssets
 import ImageAssets
+import SoundAssets
 
 screen = None
 surface = None
@@ -22,8 +24,9 @@ cityBackground = None
 ruinsBackground = None
 cityWallpaper = None
 ruinsWallpaper = None
-paralaxFactor = 8
+parallaxFactor = 8
 player = None
+levelBorder = None
 boxesCity = []
 boxesRuins = []
 currentBoxes = boxesCity
@@ -34,10 +37,11 @@ switchLock = False
 resetLock = False
 switchWarningTime = 8
 currentLevel = 1
-levelCount = 3
+levelCount = 4
 fps = 30
 
 renderLevel = False
+
 
 def init():
     global screen
@@ -66,7 +70,7 @@ def init():
     ruinsBackground = ImageAssets.loadImage(8)
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
-
+    SoundAssets.init()
     if renderLevel:
         saveLevel()
         quitGame()
@@ -112,16 +116,17 @@ def update():
 
     testBorder()
 
+
 def draw():
     surface.fill("Black")
     # draw below here!
 
     if inCity:
-        surface.blit(cityWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(cityBackground, (-cam.x, -cam.y))
+        surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
+        # surface.blit(cityBackground, (-cam.x, -cam.y))
     else:
-        surface.blit(ruinsWallpaper, (-cam.x / paralaxFactor, -cam.y / paralaxFactor))
-        #surface.blit(ruinsBackground, (-cam.x, -cam.y))
+        surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
+        # surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
     for b in currentBoxes:
         b.draw(surface, cam)
@@ -131,9 +136,10 @@ def draw():
 
     player.draw(surface, cam)
 
-    # dont edit this code below
+    # don't edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
     screen.blit(upscaled, (0, 0))
+
 
 def testBorder():
     if player.getHitbox().x < 0:
@@ -143,6 +149,7 @@ def testBorder():
         reset()
     if player.getHitbox().x > levelBorder.x:
         nextLevel()
+
 
 def reset():
     global inCity
@@ -156,15 +163,19 @@ def reset():
     currentBoxes = boxesCity
     player.isDead = False
 
+
 def nextLevel():
     global currentLevel
 
     currentLevel += 1
     if currentLevel <= levelCount:
+        if currentLevel == 2:
+            SoundAssets.clearMusic()
         reset()
     else:
         print("Won!")
         quitGame()
+
 
 def switch():
     global switchLock
@@ -188,6 +199,7 @@ def switch():
     inCity = not inCity
     currentBoxes = otherBoxes
 
+
 def quitGame():
     pygame.quit()
     exit()
@@ -207,6 +219,7 @@ def saveLevel():
     for b in boxesRuins:
         b.draw(ruinsSurface, cam)
     pygame.image.save(ruinsSurface, "exports/RuinsLayout.png")
+
 
 init()
 
