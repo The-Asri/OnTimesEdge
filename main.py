@@ -131,10 +131,10 @@ def update():
         reset()
     cam.update(trueWidth, trueHeight, levelBorder)
 
-        if bufferTime > 0:
-            bufferTime -= 1
-            if bufferTime <= 0:
-                bufferBox = None
+    if bufferTime > 0:
+        bufferTime -= 1
+        if bufferTime <= 0:
+            bufferBox = None
 
     testBorder()
 
