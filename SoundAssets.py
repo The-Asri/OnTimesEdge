@@ -1,33 +1,25 @@
 from pygame import mixer
-background = False
-jumpSound = None
 
-def init():
-    global jumpSound
 
-    mixer.music.set_volume(0.1)
+class SoundHandler:
+    def __init__(self):
+        mixer.init()
+        self.volume = 0.05
+        self.sfx_volume = 0.05
+        self.background_sfx = "./sounds/background.mp3"
+        self.sfx = {
+                    "jump": mixer.Sound("./sounds/jump.mp3"),
+                    "death": mixer.Sound("./sounds/death.mp3")
+                    }
+        mixer.music.load(self.background_sfx)
 
-    jumpSound = mixer.Sound("./sounds/laser.wav")
-    mixer.Sound.set_volume(jumpSound, 0.1)
-def loadMusic(id):
-    global background
+    def playBackground(self):
+        mixer.music.set_volume(self.volume)
+        mixer.music.play(-1, 0, 200)
 
-    if id == 1:
-        if not background:
-            mixer.music.load("./sounds/background.wav")
-            background = True
-            mixer.music.play(-1, fade_ms=1000)
-    if id == 2:
-        if not background:
-            background = mixer.music.load("./sounds/Wowkie_Zhang_HD_MV.mp3")
-            background = True
-            mixer.music.play(-1, fade_ms=1000)
+    def stopBackground(self):
+        mixer.music.fadeout(100)
 
-def clearMusic():
-    global background
-    mixer.music.unload()
-    background = False
-
-def playSound(id):
-    if id == 1:
-        jumpSound.play()
+    def playSound(self, sound):
+        mixer.Sound.set_volume(self.sfx[sound], self.sfx_volume)
+        self.sfx[sound].play()

@@ -23,7 +23,6 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     levelBorder.y = 180
     cityBackground = ImageAssets.loadImage(7)
     ruinsBackground = ImageAssets.loadImage(8)
-    SoundAssets.loadMusic(1)
 
     boxesCity.clear()
     # same
@@ -53,7 +52,6 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     levelBorder.y = 200
     cityBackground = ImageAssets.loadImage(1)
     ruinsBackground = ImageAssets.loadImage(2)
-    SoundAssets.loadMusic(2)
 
     boxesCity.clear()
     #same
