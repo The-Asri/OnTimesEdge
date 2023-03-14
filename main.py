@@ -14,6 +14,7 @@ screen = None
 surface = None
 clock = None
 keyManager = None
+soundHandler = None
 cam = None
 trueWidth = 180
 trueHeight = 120
@@ -47,6 +48,7 @@ def init():
     global screen
     global clock
     global keyManager
+    global soundHandler
     global surface
     global cam
     global levelBorder
@@ -57,6 +59,7 @@ def init():
     global player
 
     pygame.init()
+    soundHandler = SoundAssets.SoundHandler()
     screen = pygame.display.set_mode((width, height))
     surface = pygame.Surface((trueWidth, trueHeight))
     pygame.display.set_caption("GameJam")
@@ -70,7 +73,6 @@ def init():
     ruinsBackground = ImageAssets.loadImage(8)
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
-    SoundAssets.init()
     if renderLevel:
         saveLevel()
         quitGame()
@@ -95,6 +97,7 @@ def update():
     if keyManager.key_escape:
         quitGame()
     if keyManager.key_reset and not resetLock:
+        soundHandler.playSound("jump")
         reset()
     if keyManager.key_switch and not switchLock:
         switch()
@@ -169,8 +172,6 @@ def nextLevel():
 
     currentLevel += 1
     if currentLevel <= levelCount:
-        if currentLevel == 2:
-            SoundAssets.clearMusic()
         reset()
     else:
         print("Won!")

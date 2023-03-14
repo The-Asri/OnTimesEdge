@@ -7,8 +7,10 @@ class SoundHandler:
         self.volume = 0.05
         self.sfx_volume = 0.05
         self.background_sfx = "./sounds/background.mp3"
-        self.sfx = {"jump": mixer.Sound("./sounds/jump.mp3")}
-
+        self.sfx = {
+                    "jump": mixer.Sound("./sounds/jump.mp3"),
+                    "death": mixer.Sound("./sounds/death.mp3")
+                    }
         mixer.music.load(self.background_sfx)
 
     def playBackground(self):
