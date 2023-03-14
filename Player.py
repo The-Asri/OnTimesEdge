@@ -1,6 +1,7 @@
 import pygame
 import box
 import ImageAssets
+import SoundAssets
 
 gravity = 0.6
 gravityCap = 0.2
@@ -63,6 +64,7 @@ class Player(box.Box):
                 self.vx *= friction_standing
 
             if keyManager.key_jump and not self.jumpLock:
+                SoundAssets.playSound(1)
                 self.index = 0
                 self.jumpLock = True
                 self.vy -= (jumpPower + abs(self.vx)) / jumpCap

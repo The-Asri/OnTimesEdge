@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 import eventHandler
 import KeyManager
 import camera
@@ -7,6 +8,7 @@ import border
 import Player
 import LevelAssets
 import ImageAssets
+import SoundAssets
 
 screen = None
 surface = None
@@ -68,7 +70,7 @@ def init():
     ruinsBackground = ImageAssets.loadImage(8)
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
-
+    SoundAssets.init()
     if renderLevel:
         saveLevel()
         quitGame()
@@ -167,6 +169,8 @@ def nextLevel():
 
     currentLevel += 1
     if currentLevel <= levelCount:
+        if currentLevel == 2:
+            SoundAssets.clearMusic()
         reset()
     else:
         print("Won!")
