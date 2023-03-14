@@ -60,6 +60,7 @@ def init():
 
     pygame.init()
     soundHandler = SoundAssets.SoundHandler()
+    soundHandler.playBackground()
     screen = pygame.display.set_mode((width, height))
     surface = pygame.Surface((trueWidth, trueHeight))
     pygame.display.set_caption("GameJam")
