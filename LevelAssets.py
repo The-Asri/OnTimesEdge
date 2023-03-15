@@ -4,25 +4,25 @@ import Player
 import ImageAssets
 import SoundAssets
 
-def loadLevel(id, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
+def loadLevel(id, boxesCity, boxesRuins, levelBorder, background, player):
     if id == 1:
-        loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        loadLevel1(boxesCity, boxesRuins, levelBorder, background, player)
     if id == 2:
-        loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        loadLevel2(boxesCity, boxesRuins, levelBorder, background, player)
     if id == 3:
-        loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        loadLevel3(boxesCity, boxesRuins, levelBorder, background, player)
     if id == 4:
-        loadLevel4(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+        loadLevel4(boxesCity, boxesRuins, levelBorder, background, player)
 
-def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
+def loadLevel1(boxesCity, boxesRuins, levelBorder, background, player):
     player.x = 50
     player.y = 100 - 12 - 1
     player.vx = 0
     player.vy = 0
     levelBorder.x = 350
     levelBorder.y = 180
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    background.cityBackground = ImageAssets.loadImage(3)
+    background.ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same
@@ -43,15 +43,15 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesRuins.append(box.Box(280, 65, 15, 25, type="Unslideable"))
 
 
-def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
+def loadLevel2(boxesCity, boxesRuins, levelBorder, background, player):
     player.x = 40
     player.y = 100 - 12 - 1
     player.vx = 0
     player.vy = 0
     levelBorder.x = 430
     levelBorder.y = 200
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    background.cityBackground = ImageAssets.loadImage(5)
+    background.ruinsBackground = ImageAssets.loadImage(6)
 
     boxesCity.clear()
     #same
@@ -78,15 +78,15 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesRuins.append(box.Box(95, 95, 35, 5, "Unslideable"))
 
 
-def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
+def loadLevel3(boxesCity, boxesRuins, levelBorder, background, player):
     player.x = 50
     player.y = 200 - 12 - 1
     player.vx = 0
     player.vy = 0
     levelBorder.x = 430
     levelBorder.y = 300
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    background.cityBackground = ImageAssets.loadImage(3)
+    background.ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same
@@ -121,15 +121,15 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     boxesRuins.append(box.Box(330, 140, 10, 10))
     boxesRuins.append(box.Box(340, 125, 15, 25))
 
-def loadLevel4(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player):
+def loadLevel4(boxesCity, boxesRuins, levelBorder, background, player):
     player.x = 50
     player.y = 200 - 12 - 1 + 200
     player.vx = 0
     player.vy = 0
     levelBorder.x = 700
     levelBorder.y = 450
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
+    background.cityBackground = ImageAssets.loadImage(3)
+    background.ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same

@@ -10,6 +10,13 @@ import LevelAssets
 import ImageAssets
 import SoundAssets
 
+
+class Background:
+    def __init__(self):
+        self.cityBackground = None
+        self.ruinsBackground = None
+
+
 screen = None
 surface = None
 clock = None
@@ -21,8 +28,7 @@ trueHeight = 120
 upscale = 5
 width = trueWidth * upscale
 height = trueHeight * upscale
-cityBackground = None
-ruinsBackground = None
+background = Background()
 cityWallpaper = None
 ruinsWallpaper = None
 parallaxFactor = 2.5
@@ -55,8 +61,7 @@ def init():
     global surface
     global cam
     global levelBorder
-    global cityBackground
-    global ruinsBackground
+    global background
     global cityWallpaper
     global ruinsWallpaper
     global player
@@ -73,9 +78,9 @@ def init():
     levelBorder = border.Border(0, 0)
     cityWallpaper = ImageAssets.loadImage(1)
     ruinsWallpaper = ImageAssets.loadImage(2)
-    cityBackground = ImageAssets.loadImage(3)
-    ruinsBackground = ImageAssets.loadImage(4)
-    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    background.cityBackground = ImageAssets.loadImage(3)
+    background.ruinsBackground = ImageAssets.loadImage(4)
+    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
     if renderLevel:
         saveLevel()
@@ -155,10 +160,10 @@ def draw():
     else:
         if inCity:
             surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-            surface.blit(cityBackground, (-cam.x, -cam.y))
+            surface.blit(background.cityBackground, (-cam.x, -cam.y))
         else:
             surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-            surface.blit(ruinsBackground, (-cam.x, -cam.y))
+            surface.blit(background.ruinsBackground, (-cam.x, -cam.y))
 
         for b in currentBoxes:
             #b.draw(surface, cam)
@@ -196,7 +201,7 @@ def reset():
     resetLock = True
     soundHandler.playSound("death")
 
-    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
     inCity = True
     currentBoxes = boxesCity
     player.isDead = False

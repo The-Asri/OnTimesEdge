@@ -9,5 +9,9 @@ def loadImage(id):
         return pygame.image.load("graphics/CityLayout1.png")
     if id == 4:
         return pygame.image.load("graphics/RuinsLayout1.png")
+    if id == 5:
+        return pygame.image.load("graphics/CityLayout2.png")
+    if id == 6:
+        return pygame.image.load("graphics/RuinsLayout2.png")
     if id == 11:
         return pygame.image.load("graphics/Player.png")
