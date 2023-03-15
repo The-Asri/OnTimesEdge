@@ -4,15 +4,14 @@ from pygame import mixer
 class SoundHandler:
     def __init__(self):
         mixer.init()
-        self.volume = 0.05
-        self.sfx_volume = 0.05
+        self.volume = 0.02
+        self.sfx_volume = 0.02
         self.background_sfx = "./sounds/background.mp3"
         self.sfx = {
-                    #"jump": mixer.Sound("./sounds/jump.mp3"),
-                    #"death": mixer.Sound("./sounds/death.mp3"),
                     "jump": mixer.Sound("./sounds/jump.mp3"),
                     "death": mixer.Sound("./sounds/death.mp3"),
                     "walljump": mixer.Sound("./sounds/jump.mp3"),
+                    "reset": mixer.Sound("./sounds/jump.mp3")
                     }
         mixer.music.load(self.background_sfx)
 
