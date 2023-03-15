@@ -21,8 +21,8 @@ def loadLevel1(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.vy = 0
     levelBorder.x = 350
     levelBorder.y = 180
-    cityBackground = ImageAssets.loadImage(7)
-    ruinsBackground = ImageAssets.loadImage(8)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same
@@ -50,8 +50,8 @@ def loadLevel2(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.vy = 0
     levelBorder.x = 430
     levelBorder.y = 200
-    cityBackground = ImageAssets.loadImage(1)
-    ruinsBackground = ImageAssets.loadImage(2)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     #same
@@ -85,8 +85,8 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.vy = 0
     levelBorder.x = 430
     levelBorder.y = 300
-    cityBackground = ImageAssets.loadImage(7)
-    ruinsBackground = ImageAssets.loadImage(8)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same
@@ -128,8 +128,8 @@ def loadLevel4(boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackgrou
     player.vy = 0
     levelBorder.x = 700
     levelBorder.y = 450
-    cityBackground = ImageAssets.loadImage(7)
-    ruinsBackground = ImageAssets.loadImage(8)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
 
     boxesCity.clear()
     # same

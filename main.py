@@ -25,7 +25,7 @@ cityBackground = None
 ruinsBackground = None
 cityWallpaper = None
 ruinsWallpaper = None
-parallaxFactor = 8
+parallaxFactor = 2.5
 player = None
 levelBorder = None
 boxesCity = []
@@ -73,8 +73,8 @@ def init():
     levelBorder = border.Border(0, 0)
     cityWallpaper = ImageAssets.loadImage(1)
     ruinsWallpaper = ImageAssets.loadImage(2)
-    cityBackground = ImageAssets.loadImage(7)
-    ruinsBackground = ImageAssets.loadImage(8)
+    cityBackground = ImageAssets.loadImage(3)
+    ruinsBackground = ImageAssets.loadImage(4)
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
     if renderLevel:
@@ -155,13 +155,14 @@ def draw():
     else:
         if inCity:
             surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-            # surface.blit(cityBackground, (-cam.x, -cam.y))
+            surface.blit(cityBackground, (-cam.x, -cam.y))
         else:
             surface.blit(ruinsWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
-            # surface.blit(ruinsBackground, (-cam.x, -cam.y))
+            surface.blit(ruinsBackground, (-cam.x, -cam.y))
 
         for b in currentBoxes:
-            b.draw(surface, cam)
+            #b.draw(surface, cam)
+            pass
 
         if bufferBox is not None:
             bufferBox.draw(surface, cam)

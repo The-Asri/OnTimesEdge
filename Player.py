@@ -35,7 +35,7 @@ class Player(box.Box):
         self.wallJumpDelay = 0
         self.index = 0
         self.ticks = 0
-        self.sheet = ImageAssets.loadImage(9)
+        self.sheet = ImageAssets.loadImage(11)
         self.landed = False
 
     def update(self, boxes, keyManager, soundHandler):
