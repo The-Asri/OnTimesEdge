@@ -116,7 +116,6 @@ def update():
                 ticking = True
 
         if keyManager.key_reset and not resetLock:
-            soundHandler.playSound("jump")
             reset()
         if keyManager.key_switch and not switchLock:
             switch()
@@ -194,9 +193,12 @@ def reset():
     global resetLock
 
     resetLock = True
-    soundHandler.playSound("death")
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, cityBackground, ruinsBackground, player)
+    if player.isDead:
+        soundHandler.playSound("death")
+    else:
+        soundHandler.playSound("reset")
     inCity = True
     currentBoxes = boxesCity
     player.isDead = False
