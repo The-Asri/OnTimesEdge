@@ -8,6 +8,7 @@ key_jump = pygame.K_SPACE
 key_switch = pygame.K_e
 key_reset = pygame.K_r
 key_escape = pygame.K_ESCAPE
+key_fullReset = pygame.K_g
 
 class KeyManager:
     def __init__(self):
@@ -19,6 +20,7 @@ class KeyManager:
         self.key_switch = False
         self.key_reset = False
         self.key_escape = False
+        self.key_fullReset = False
 
     def keyDown(self, key):
         if key == key_left:
@@ -37,6 +39,8 @@ class KeyManager:
             self.key_reset = True
         if key == key_escape:
             self.key_escape = True
+        if key == key_fullReset:
+            self.key_fullReset = True
 
     def keyUp(self, key):
         if key == key_left:
@@ -55,3 +59,5 @@ class KeyManager:
             self.key_reset = False
         if key == key_escape:
             self.key_escape = False
+        if key == key_fullReset:
+            self.key_fullReset = False

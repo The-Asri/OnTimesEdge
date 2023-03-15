@@ -109,9 +109,7 @@ def update():
 
     if winScreen:
         if keyManager.key_reset:
-            currentLevel = 1
-            ticks = 0
-            reset()
+            fullReset()
             winScreen = False
     else:
         if ticking:
@@ -122,10 +120,12 @@ def update():
 
         if keyManager.key_reset and not resetLock:
             reset()
+        if keyManager.key_fullReset and not resetLock:
+            fullReset()
         if keyManager.key_switch and not switchLock:
             switch()
 
-        if not keyManager.key_reset:
+        if not keyManager.key_reset and not keyManager.key_fullReset:
             resetLock = False
         if not keyManager.key_switch:
             switchLock = False
@@ -207,6 +207,16 @@ def reset():
     inCity = True
     currentBoxes = boxesCity
     player.isDead = False
+
+def fullReset():
+    global currentLevel
+    global ticks
+    global ticking
+
+    currentLevel = 1
+    ticking = False
+    ticks = 0
+    reset()
 
 
 def nextLevel():

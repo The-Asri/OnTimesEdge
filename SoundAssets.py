@@ -11,7 +11,8 @@ class SoundHandler:
                     "jump": mixer.Sound("./sounds/jump.mp3"),
                     "death": mixer.Sound("./sounds/death.mp3"),
                     "walljump": mixer.Sound("./sounds/jump.mp3"),
-                    "reset": mixer.Sound("./sounds/jump.mp3")
+                    "reset": mixer.Sound("./sounds/jump.mp3"),
+                    "walk": mixer.Sound("./sounds/jump.mp3")
                     }
         mixer.music.load(self.background_sfx)
 
