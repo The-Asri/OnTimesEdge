@@ -72,7 +72,7 @@ def init():
     soundHandler.playBackground()
     screen = pygame.display.set_mode((width, height))
     surface = pygame.Surface((trueWidth, trueHeight))
-    pygame.display.set_caption("GameJam")
+    pygame.display.set_caption("On Time's Edge")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
     player = Player.Player(0, 0)
@@ -82,7 +82,7 @@ def init():
     background.cityBackground = ImageAssets.loadImage(3)
     background.ruinsBackground = ImageAssets.loadImage(4)
 
-    intro.intro(screen, surface, cityWallpaper, trueWidth, trueHeight, upscale, clock, keyManager)
+    intro.intro(screen, surface, cityWallpaper, ruinsWallpaper, trueWidth, trueHeight, upscale, clock, keyManager)
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
