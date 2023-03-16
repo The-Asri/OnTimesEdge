@@ -85,8 +85,8 @@ def loadLevel3(boxesCity, boxesRuins, levelBorder, background, player):
     player.vy = 0
     levelBorder.x = 430
     levelBorder.y = 300
-    background.cityBackground = ImageAssets.loadImage(3)
-    background.ruinsBackground = ImageAssets.loadImage(4)
+    background.cityBackground = ImageAssets.loadImage(7)
+    background.ruinsBackground = ImageAssets.loadImage(8)
 
     boxesCity.clear()
     # same

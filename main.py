@@ -71,7 +71,7 @@ def init():
     soundHandler.playBackground()
     screen = pygame.display.set_mode((width, height))
     surface = pygame.Surface((trueWidth, trueHeight))
-    pygame.display.set_caption("GameJam")
+    pygame.display.set_caption("On Time's Edge")
     clock = pygame.time.Clock()
     keyManager = KeyManager.KeyManager()
     player = Player.Player(0, 0)
@@ -200,10 +200,14 @@ def reset():
     resetLock = True
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
+
     if player.isDead:
         soundHandler.playSound("death")
     else:
         soundHandler.playSound("reset")
+
+    #cam.focus(trueWidth, trueHeight, levelBorder)
+
     inCity = True
     currentBoxes = boxesCity
     player.isDead = False
