@@ -205,10 +205,7 @@ def reset():
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
 
-    if player.isDead:
-        soundHandler.playSound("death")
-    else:
-        soundHandler.playSound("reset")
+    soundHandler.playSound("death")
 
     #cam.focus(trueWidth, trueHeight, levelBorder)
 
