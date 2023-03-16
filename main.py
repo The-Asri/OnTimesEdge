@@ -123,7 +123,7 @@ def update():
                 ticking = True
 
         if keyManager.key_reset and not resetLock:
-            reset()
+            reset(True)
         if keyManager.key_fullReset and not resetLock:
             fullReset()
         if (keyManager.key_switch1 or keyManager.key_switch2) and not switchLock:
@@ -136,7 +136,7 @@ def update():
 
     player.update(currentBoxes, keyManager, soundHandler)
     if player.isDead:
-        reset()
+        reset(True)
     cam.update(trueWidth, trueHeight, levelBorder)
 
     if bufferTime > 0:
@@ -191,12 +191,12 @@ def testBorder():
         player.x = -2
         player.vx = 0
     if player.getHitbox().y > levelBorder.y:
-        reset()
+        reset(True)
     if player.getHitbox().x > levelBorder.x:
         nextLevel()
 
 
-def reset():
+def reset(playsound=False):
     global inCity
     global currentBoxes
     global resetLock
@@ -204,8 +204,8 @@ def reset():
     resetLock = True
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
-
-    soundHandler.playSound("death")
+    if playsound:
+        soundHandler.playSound("death")
 
     #cam.focus(trueWidth, trueHeight, levelBorder)
 
@@ -231,7 +231,7 @@ def nextLevel():
 
     currentLevel += 1
     if currentLevel <= levelCount:
-        reset()
+        reset(False)
     else:
         ticking = False
         winScreen = True
