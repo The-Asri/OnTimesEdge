@@ -20,7 +20,7 @@ wallJumpPower = 5
 wallKickPower = 4
 wallJumpTicks = 5
 startRunning = 1.5
-animationSpeed = 5
+animationSpeed = 4
 
 
 class Player(box.Box):
@@ -155,17 +155,17 @@ class Player(box.Box):
         self.y += self.vy
 
 
-    def draw(self, s, c, boxes):
+    def draw(self, s, c, boxes, soundHandler):
         #hb = self.getHitbox()
         #hb.width += 1
         #hb.height += 1
         #hb.draw(s, c)
         #pygame.draw.rect(s, "Red", (self.x - c.x, self.y - c.y, self.width, self.height), 1)
 
-        s.blit(self.sheet, (self.x - c.x, self.y - c.y, self.width, self.height), self.getCrop(boxes))
+        s.blit(self.sheet, (self.x - c.x, self.y - c.y, self.width, self.height), self.getCrop(boxes, soundHandler))
 
 
-    def getCrop(self, boxes):
+    def getCrop(self, boxes, soundHandler):
         x = 0
         y = self.direction == "left"
 
@@ -181,6 +181,8 @@ class Player(box.Box):
 
             x = self.index + 3
         elif abs(self.vx) > startRunning:
+            if self.index == 0 and self.ticks == 0:
+                soundHandler.playSound("walk")
             self.ticks += 1
 
             if self.ticks >= animationSpeed:

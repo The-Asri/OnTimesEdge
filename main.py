@@ -179,7 +179,7 @@ def draw():
         img = font.render(str(int(ticks / fps * 100) / 100), False, "Yellow")
         surface.blit(img, (2, 2))
 
-    player.draw(surface, cam, currentBoxes)
+    player.draw(surface, cam, currentBoxes, soundHandler)
 
     # don't edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
