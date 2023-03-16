@@ -30,3 +30,14 @@ class Camera:
             self.y = int(self.y)
             self.x = int(border.getX(self.x, self.x + w))
             self.y = int(border.getY(self.y, self.y + h))
+
+    def focus(self, w, h, border):
+        if self.target is not None:
+            dx = (self.target.x + self.target.width / 2) - self.x - w / 2
+            dy = (self.target.y + self.target.height / 2 - yOffset) - self.y - h / 2
+            self.x += dx
+            self.y += dy
+            self.x = int(self.x)
+            self.y = int(self.y)
+            self.x = int(border.getX(self.x, self.x + w))
+            self.y = int(border.getY(self.y, self.y + h))

@@ -126,12 +126,12 @@ def update():
             reset()
         if keyManager.key_fullReset and not resetLock:
             fullReset()
-        if keyManager.key_switch and not switchLock:
+        if (keyManager.key_switch1 or keyManager.key_switch2) and not switchLock:
             switch()
 
         if not keyManager.key_reset and not keyManager.key_fullReset:
             resetLock = False
-        if not keyManager.key_switch:
+        if not (keyManager.key_switch1 or keyManager.key_switch2):
             switchLock = False
 
     player.update(currentBoxes, keyManager, soundHandler)
@@ -204,10 +204,11 @@ def reset():
     resetLock = True
 
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
-    if player.isDead:
-        soundHandler.playSound("death")
-    else:
-        soundHandler.playSound("reset")
+
+    soundHandler.playSound("death")
+
+    #cam.focus(trueWidth, trueHeight, levelBorder)
+
     inCity = True
     currentBoxes = boxesCity
     player.isDead = False
