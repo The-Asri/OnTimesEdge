@@ -9,6 +9,7 @@ import Player
 import LevelAssets
 import ImageAssets
 import SoundAssets
+import intro
 
 
 class Background:
@@ -80,6 +81,9 @@ def init():
     ruinsWallpaper = ImageAssets.loadImage(2)
     background.cityBackground = ImageAssets.loadImage(3)
     background.ruinsBackground = ImageAssets.loadImage(4)
+
+    intro.intro(screen, surface, cityWallpaper, trueWidth, trueHeight, upscale, clock, keyManager)
+
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
     if renderLevel:
@@ -109,9 +113,7 @@ def update():
 
     if winScreen:
         if keyManager.key_reset:
-            currentLevel = 1
-            ticks = 0
-            reset()
+            fullReset()
             winScreen = False
     else:
         if ticking:
@@ -122,10 +124,12 @@ def update():
 
         if keyManager.key_reset and not resetLock:
             reset()
+        if keyManager.key_fullReset and not resetLock:
+            fullReset()
         if keyManager.key_switch and not switchLock:
             switch()
 
-        if not keyManager.key_reset:
+        if not keyManager.key_reset and not keyManager.key_fullReset:
             resetLock = False
         if not keyManager.key_switch:
             switchLock = False
@@ -212,6 +216,16 @@ def reset():
     currentBoxes = boxesCity
     player.isDead = False
 
+def fullReset():
+    global currentLevel
+    global ticks
+    global ticking
+
+    currentLevel = 1
+    ticking = False
+    ticks = 0
+    reset()
+
 
 def nextLevel():
     global currentLevel
@@ -268,7 +282,6 @@ def saveLevel():
     for b in boxesRuins:
         b.draw(ruinsSurface, cam)
     pygame.image.save(ruinsSurface, "exports/RuinsLayout.png")
-
 
 init()
 
