@@ -9,6 +9,7 @@ import Player
 import LevelAssets
 import ImageAssets
 import SoundAssets
+import intro
 
 
 class Background:
@@ -80,6 +81,9 @@ def init():
     ruinsWallpaper = ImageAssets.loadImage(2)
     background.cityBackground = ImageAssets.loadImage(3)
     background.ruinsBackground = ImageAssets.loadImage(4)
+
+    intro.intro(screen, surface, cityWallpaper, trueWidth, trueHeight, upscale, clock, keyManager)
+
     LevelAssets.loadLevel(currentLevel, boxesCity, boxesRuins, levelBorder, background, player)
     cam = camera.Camera(trueWidth, trueHeight, levelBorder, player)
     if renderLevel:
@@ -274,7 +278,6 @@ def saveLevel():
     for b in boxesRuins:
         b.draw(ruinsSurface, cam)
     pygame.image.save(ruinsSurface, "exports/RuinsLayout.png")
-
 
 init()
 
