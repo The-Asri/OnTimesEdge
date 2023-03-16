@@ -134,10 +134,10 @@ def update():
         if not (keyManager.key_switch1 or keyManager.key_switch2):
             switchLock = False
 
-    player.update(currentBoxes, keyManager, soundHandler)
-    if player.isDead:
-        reset(True)
-    cam.update(trueWidth, trueHeight, levelBorder)
+        player.update(currentBoxes, keyManager, soundHandler)
+        if player.isDead:
+            reset(True)
+        cam.update(trueWidth, trueHeight, levelBorder)
 
     if bufferTime > 0:
         bufferTime -= 1
@@ -179,7 +179,7 @@ def draw():
         img = font.render(str(int(ticks / fps * 100) / 100), False, "Yellow")
         surface.blit(img, (2, 2))
 
-    player.draw(surface, cam, currentBoxes, soundHandler)
+        player.draw(surface, cam, currentBoxes, soundHandler)
 
     # don't edit this code below
     upscaled = pygame.transform.scale_by(surface, upscale)
