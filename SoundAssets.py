@@ -6,7 +6,7 @@ class SoundHandler:
         mixer.init()
         self.volume = 2
         self.sfx_volume = 1
-        self.background_sfx = "./sounds/background.mp3"
+        self.background_sfx = "./sounds/AtTimesEdge.mp3"
         self.sfx = {
                     "jump": mixer.Sound("./sounds/jump.mp3"),
                     "death": mixer.Sound("./sounds/death.mp3"),
