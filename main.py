@@ -25,15 +25,15 @@ clock = None
 keyManager = None
 soundHandler = None
 cam = None
-trueWidth = 180
-trueHeight = 120
+trueWidth = 260
+trueHeight = 160
 upscale = 5
 width = trueWidth * upscale
 height = trueHeight * upscale
 background = Background()
 cityWallpaper = None
 ruinsWallpaper = None
-parallaxFactor = 2.5
+parallaxFactor = 4
 player = None
 levelBorder = None
 boxesCity = []
@@ -45,7 +45,7 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 1
+currentLevel = 4
 levelCount = 4
 fps = 30
 ticks = 0
@@ -158,9 +158,9 @@ def draw():
         surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
         font = pygame.font.SysFont(None, 20)
         img = font.render("Time: " + str(int(ticks / fps * 100) / 100) + " Seconds", False, "Yellow")
-        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2))
+        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2 - 10))
         img = font.render("Press [R] to try again", False, "Yellow")
-        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2 + 20))
+        surface.blit(img, (trueWidth / 2 - 60, trueHeight / 2 + 10))
     else:
         if inCity:
             surface.blit(cityWallpaper, (-cam.x / parallaxFactor, -cam.y / parallaxFactor))
@@ -175,10 +175,6 @@ def draw():
 
         if bufferBox is not None:
             bufferBox.draw(surface, cam)
-
-        font = pygame.font.SysFont(None, 20)
-        img = font.render(str(int(ticks / fps * 100) / 100), False, "Yellow")
-        surface.blit(img, (2, 2))
 
         player.draw(surface, cam, currentBoxes, soundHandler)
 

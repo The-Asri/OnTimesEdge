@@ -34,9 +34,9 @@ def intro(screen, surface, cityBackground, ruinsBackground, w, h, upscale, clock
         surface.blit(background, (-introcam.x, -introcam.y))
         font = pygame.font.SysFont(None, 20)
         img = font.render("Press [Enter] to start", False, color)
-        surface.blit(img, (w / 2 - 64, h / 2 + 20))
+        surface.blit(img, (w / 2 - 64, h / 2 + 10))
         upscaled = pygame.transform.scale_by(surface, upscale)
-        upscaled.blit(logo, (-12, 0))
+        upscaled.blit(logo, (140, 80))
         screen.blit(upscaled, (0, 0))
 
         if keyManager.key_start:
