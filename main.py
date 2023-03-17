@@ -1,6 +1,7 @@
 import pygame
 from pygame import mixer
 import eventHandler
+from sys import exit
 import KeyManager
 import camera
 import box
