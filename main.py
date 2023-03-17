@@ -45,7 +45,7 @@ bufferTime = 0
 switchLock = False
 resetLock = False
 switchWarningTime = 8
-currentLevel = 4
+currentLevel = 1
 levelCount = 4
 fps = 30
 ticks = 0
@@ -175,6 +175,10 @@ def draw():
 
         if bufferBox is not None:
             bufferBox.draw(surface, cam)
+
+        font = pygame.font.SysFont(None, 20)
+        img = font.render(str(int(ticks / fps * 100) / 100), False, "Yellow")
+        surface.blit(img, (5, 5))
 
         player.draw(surface, cam, currentBoxes, soundHandler)
 
