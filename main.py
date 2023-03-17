@@ -69,6 +69,7 @@ def init():
     global player
 
     pygame.init()
+    pygame.display.set_icon(ImageAssets.loadImage(14))
     soundHandler = SoundAssets.SoundHandler()
     soundHandler.playBackground()
     screen = pygame.display.set_mode((width, height))

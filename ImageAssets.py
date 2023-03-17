@@ -27,3 +27,5 @@ def loadImage(id):
         return pygame.image.load("graphics/OnTimesEdgeLogo.png")
     if id == 13:
         return pygame.image.load("graphics/OnTimesEdgeLogo2.png")
+    if id == 14:
+        return pygame.image.load("graphics/ico.png")
