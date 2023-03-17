@@ -4,7 +4,7 @@ from pygame import mixer
 class SoundHandler:
     def __init__(self):
         mixer.init()
-        self.volume = 1
+        self.volume = 2
         self.sfx_volume = 1
         self.background_sfx = "./sounds/background.mp3"
         self.sfx = {
@@ -14,9 +14,10 @@ class SoundHandler:
                     "reset": mixer.Sound("./sounds/jump.mp3"),
                     "walk": mixer.Sound("./sounds/walk.mp3")
                     }
-        mixer.Sound.set_volume(self.sfx["jump"], 0.1 * self.sfx_volume)
-        mixer.Sound.set_volume(self.sfx["walljump"], 0.1 * self.sfx_volume)
+        mixer.Sound.set_volume(self.sfx["jump"], 0.05 * self.sfx_volume)
+        mixer.Sound.set_volume(self.sfx["walljump"], 0.05 * self.sfx_volume)
         mixer.Sound.set_volume(self.sfx["death"], 0.1 * self.sfx_volume)
+        mixer.Sound.set_volume(self.sfx["walk"], 0.5 * self.sfx_volume)
         mixer.music.load(self.background_sfx)
 
     def playBackground(self):
